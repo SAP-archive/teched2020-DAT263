@@ -1,4 +1,4 @@
-# Session ID - Session Title
+# DAT263 - Create and Manage End-to-End Data Pipelines with SAP Data Intelligence
 
 ## Description
 
