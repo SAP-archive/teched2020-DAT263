@@ -2,11 +2,29 @@
 
 ## Description
 
-This repository contains the material for the SAP TechEd 2020 session called Session ID - Session Title. 
+This repository contains the material for the SAP TechEd 2020 session called Session ID - DAT263. 
 
 ## Overview
 
-This session introduces attendees to...
+This session introduces attendees to use the **SAP Data Intelligence Modeler** to create data pipelines. We try to touch as many aspects as possible within an interactive 2h workshop. We will follow a use case that is based on a customer request in the area of IoT and quality management. The background story is quite simple.
+
+### Setup
+ The customer gets on a daily basis the configuration of several devices that means the nominal value the device should produce. During the day additional files are received that contain the actual values of each device. All files are stored in an object store in a separate folder.
+
+### Process
+1. Append all configuration files and all performance files into corresponding single files and store them to another object store location.
+
+2. Merge the 2 resulting files into a HANA table by using projections, aggregation and joining. 
+
+3. Do a simple data validation and create for the failed data a quality management service ticket. 
+
+4. In order to improve the quality check a data scientist should be able to do an analysis of the IoT data to eventually develope an early alert schema. 
+
+5. The central device configuration and performance table should be exposed via a webservice to retrieve the device status from outside. 
+
+### Aquired Skills
+After having done all the tasks you are familiar with the general concept of **SAP Data Intelligence Modeler **
+
 
 ## Requirements
 
