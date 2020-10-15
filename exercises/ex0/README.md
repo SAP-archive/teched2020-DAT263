@@ -1,6 +1,6 @@
 # Exercise 1: Appending multiple source files to a single file
 
-In this exercise, you will be append a series of CSV files to an existing files in an S3 bucket.
+In this exercise, you will use the Metadata Explorer to explorer and view a batch of files stored in an Amazon S3 bucket. Using the Pipeline Modeler you will read the entire of batch of files and consolidate them into a single csv file that will be used in a later exercise. 
 
   ![](/exercises/ex0/images/completedModel.png)
 
