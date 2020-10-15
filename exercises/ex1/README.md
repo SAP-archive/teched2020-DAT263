@@ -46,12 +46,20 @@ Open the configuration of the "Structured File Consumer" operator to parameteriz
 
 ### Add Data Transform
 This operator is doing the core part of the whole pipeline. 
+
 1. Add "Data Transform" operator to the pipeline
-2. 
-
-
-
-
+2. Draw a line from the outport of the "Structured File Consumer" to the "Data Transform". This results into a creation of an inport of the "Data Transform" operator and a connection. 
+3. Double-click on the gray triangle at the right-bottom of the "Data Transform"-operator. This opens the "Data Transform" configuration canvas. 
+![Structured Data Operators](./images/OpenDataTransformConf.png)
+4. Add the "Projection" operator, link the outport of the "input1" operator to the "Projection" operator and open the configuration of the operator by double-click on the gray-triangle. 
+5. Do an "automapping" and change the name and the data tpyes in the target.
+![Structured Data Operators](./images/TransformConfig.png) with
+	1. C1: "DATE" - date
+	2. C2: "CELLID" - int32
+	3. C3: "NOM_KEY1" - float32
+	4. C4: "NOM_KEY1" - float32
+6. Go back to the "Data Transform" (click on the link at the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
+	
 
 
 
