@@ -1,26 +1,111 @@
-# Level 1 Heading
+# Excercise 1: Appending data to a file
 
-In this exercise, you will...
+In this exercise, you will be append a series of CSV files to an existing files in an S3 bucket.
 
-## Level 2 Heading
+<br>![](/exercises/ex0/images/completedModel.png)
 
-After completing these steps you will have....
+## Part 1: Preview the source data in Metadata Explorer
 
-1.	Click here.
-<br>![](/exercises/ex0/images/00_00_0010.png)
+**Objective**: To better understand the data we will be working in the later sections of this exercise we will first preview the datasets using the Metadata Explorer.
 
-2.	Insert this code.
-```
- DATA(lt_params) = request->get_form_fields(  ).
- READ TABLE lt_params REFERENCE INTO DATA(lr_params) WITH KEY name = 'cmd'.
-  IF sy-subrc <> 0.
-    response->set_status( i_code = 400
-                     i_reason = 'Bad request').
-    RETURN.
-  ENDIF.
-```
+1. Select the Metadata Explorer from the drop-down menu in the top-left of the screen.
 
-## Summary
+  <br>![](/exercises/ex0/images/dropdown_metadataExplorer.png)
 
-Now that you have ... 
-Continue to - [Exercise 1 - Exercise 1 Description](../ex1/README.md)
+2. Click on **Browse Connections**
+
+  <br>![](/exercises/ex0/images/browseConnections.png)
+
+3. Select the ```device_performance``` directory. This directory contains all of the source .csv files we will be appending in the next section of this exercise.
+
+  <br>![](/exercises/ex0/images/directory_device_performance.png)
+
+4. Click on the **View Factsheet** button
+
+  <br>![](/exercises/ex0/images/button_viewFactsheet.png)
+
+5. Click on the **Data Preview** button. You should see that our source file contains four unlabelled columns: A timestamp, a device ID, and two columns describing the value of this device.
+
+  <br>![](/exercises/ex0/images/button_dataPreview.png)
+
+## Part 2: Building the pipeline
+
+**Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files. This section we will read the contents of these sources file and re-write them into a single output csv file.
+
+1. Return to the  Modeler by using the dropdown menu in the upper left corner of your screen.
+  ![](/exercises/ex0/images/dropdown_pipelineModeler.png)
+
+2. Create a new graph by first selecting the `Graphs` tab (shown vertically) and then the **+** button.
+  ![](/exercises/ex0/images/createGraph.png)
+
+
+3. When creating a new graph the modeler should automatically switch to the `Operators` tab (shown vertically), if not then select it. Use the search field to find the `List Files` and drag drop it into the new graph.
+  ![](/exercises/ex0/images/operator_listFiles.png)
+
+4. The `List Files` operator takes a directory as an input or configurable parameter and outputs a list of all files and sub-directories in a given storage service such as Amazon S3 buckets. You can view more information about this operator by right clicking it and select `Open Documentation`.
+
+  ![](/exercises/ex0/images/doc_listFiles.png)
+
+5. Like many other operators the `List File` operator will by default read configuration parameters from its input node `dirRef` during runtime. However, in this exercise the parameters will be provided during design time:
+  - Configure the `List Files` operator by right clicking and selecting `Open Configuration`
+  - Set the list operation to occur only `Once`
+  - Select the **pencil icon** to define which storage account to read from.
+
+  ![](/exercises/ex0/images/configure_listFiles.png)
+
+6. Set the **Configuration Type** to `Connection Management`  and **Connection ID** to `TechEd2020_S3`x and select **Save**
+ ![](/exercises/ex0/images/s3_Connection.png)
+
+7. Browse the connection by clicking on the **monitor icon** and select the path directory `/device_performance` and click **Save**
+
+8. Now would be a great time to save your progress. Click on the **floppy disk** icon located in the toolbar at the top of the screen. Enter the name `FileCollection_TAxx` where xx is the ID assigned to you at the beginning of the workshop.
+
+  ![](/exercises/ex0/images/saveGraph.png)
+
+9. Use the search field to find the `Read File` operator. Drag and drop it into your graph. This operator reads the contents of files from various storage services.
+
+  ![](/exercises/ex0/images/operator_readFile.png)
+
+10. The file path to be read by the `Read File` operator can be provided either via its input node at runtime or configured at design time. In this exercise we will provide the path at runtime using the `List File` operator. Connect the output node `ref`  to the input node of the `Read Operator`
+
+11. Use the search field to find the `Write File` operator.  Drag and drop it into your graph. The `Write File` operator writes any content that is provided to its input node as a file to various object store services. Connect the output node `file` to the input node of the `Write File` operator.
+
+12. Like the `Read File` operator the `Write File` operator can be configured at runtime or design time. In this exercise we will provide the target directory at design time.
+- Select **Path Mode** to `Static`
+- Click on the **pencil button** to select the `TechEd2020_S3` connection.
+- Set **Mode** to `Append`
+- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/input/performance.csv`
+- *\[Optional\]* You can change the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
+  ![](/exercises/ex0/images/configure_writeFile.png)
+
+13. When the `Write File` operator has successfully written the last batch of data it will mark its last output with an attribute `lastBatch`. We can use this as a trigger to safely terminate the pipeline.
+  - Use the search field to find the `Message Filter` operator, drag and drop it into your graph.
+  - Connect the `file` output node to its input node
+  - Because the output node is of different datatype than the input node you will be prompted select to conversion method: Choose `From File (com.sap.from.File)`
+
+  ![](/exercises/ex0/images/operator_messageFilter.png)
+
+  ![](/exercises/ex0/images/conversion_fromFile.png)
+
+14. Right click the `Message Filter` operator, select the **Open Configuration** button, and then click the **penctil button** define which condition to filter for.
+
+  ![](/exercises/ex0/images/configure_messageFilter.png)
+
+15. Copy/paste the following json code snippet into the text editor and click **Save**
+  ```
+  {
+  	"message.lastBatch": true
+  }
+  ```
+  ![](/exercises/ex0/images/editProperty_messageFilter.png)
+
+
+16. Use the search field to find the `Graph Terminator` operator. Drag and drop it into your graph. This operator will terminate the pipeline execution when receiving any input to its input node. Connect the output node of the `Message Filter` to the input node of the `Graph Terminator`.
+
+  ![](/exercises/ex0/images/operator_graphTerminator.png)
+
+  Since the `Message Operator` is filtering out all messages that do not contain the `lastBatch` attribute the graph will not be terminated until we are sure that the last batch was written by the  for the `Write File` operator.
+
+17. Save the graph by clicking on the **floppy disk** icon located in the toolbar at the top of the screen.
+
+  ![](/exercises/ex0/images/saveGraphAgain.png)
