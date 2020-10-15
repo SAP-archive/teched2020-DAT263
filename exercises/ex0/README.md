@@ -1,4 +1,4 @@
-# Exercise 1: Appending data to a file
+# Exercise 1: Appending multiple source files to a single file
 
 In this exercise, you will be append a series of CSV files to an existing files in an S3 bucket.
 
