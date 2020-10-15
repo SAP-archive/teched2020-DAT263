@@ -1,8 +1,8 @@
-# Excercise 1: Appending data to a file
+# Exercise 1: Appending data to a file
 
 In this exercise, you will be append a series of CSV files to an existing files in an S3 bucket.
 
-<br>![](/exercises/ex0/images/completedModel.png)
+  ![](/exercises/ex0/images/completedModel.png)
 
 ## Part 1: Preview the source data in Metadata Explorer
 
@@ -10,27 +10,27 @@ In this exercise, you will be append a series of CSV files to an existing files 
 
 1. Select the Metadata Explorer from the drop-down menu in the top-left of the screen.
 
-  <br>![](/exercises/ex0/images/dropdown_metadataExplorer.png)
+  ![](/exercises/ex0/images/dropdown_metadataExplorer.png)
 
 2. Click on **Browse Connections**
 
-  <br>![](/exercises/ex0/images/browseConnections.png)
+  ![](/exercises/ex0/images/browseConnections.png)
 
 3. Select the ```device_performance``` directory. This directory contains all of the source .csv files we will be appending in the next section of this exercise.
 
-  <br>![](/exercises/ex0/images/directory_device_performance.png)
+  ![](/exercises/ex0/images/directory_device_performance.png)
 
 4. Click on the **View Factsheet** button
 
-  <br>![](/exercises/ex0/images/button_viewFactsheet.png)
+  ![](/exercises/ex0/images/button_viewFactsheet.png)
 
 5. Click on the **Data Preview** button. You should see that our source file contains four unlabelled columns: A timestamp, a device ID, and two columns describing the value of this device.
 
-  <br>![](/exercises/ex0/images/button_dataPreview.png)
+  ![](/exercises/ex0/images/button_dataPreview.png)
 
 ## Part 2: Building the pipeline
 
-**Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files. This section we will read the contents of these sources file and re-write them into a single output csv file.
+**Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files. In this section we will read the contents of these sources file and re-write them into a single output csv file.
 
 1. Return to the  Modeler by using the dropdown menu in the upper left corner of your screen.
   ![](/exercises/ex0/images/dropdown_pipelineModeler.png)
@@ -109,3 +109,38 @@ In this exercise, you will be append a series of CSV files to an existing files 
 17. Save the graph by clicking on the **floppy disk** icon located in the toolbar at the top of the screen.
 
   ![](/exercises/ex0/images/saveGraphAgain.png)
+
+## Part 3: Executing the pipeline
+
+Now that you've created a complete graph it is time to execute it and look at the output data.
+
+1. To execute the pipeline click on the **play button** at the top of the screen. The pipeline will appear under the **Status** tab. It will first appear to be in status ``Pending`` and then after a few seconds ``Running``.
+
+  ![](/exercises/ex0/images/runGraph.png)
+
+2. If the pipeline did not run into any errors then the execution should reach the `Graph Terminator` operator and the status will eventually switch to status `Completed`.
+
+  **Tip:** *If the pipeline terminates with an error you can click on the title of the failed graph to view a detailed error message.*
+
+  ![](/exercises/ex0/images/deadGraph.png)
+
+3. After the pipeline reaches status `Completed` return to the **Metdata Explorer** using the drop-down menu in the top left corner of the screen.
+
+  ![](/exercises/ex0/images/goTometadataExplorer.png)
+
+4. Click on **Browse Connections** and navigate to the `/input/` directory in the `TechEd2020_S3` connection.
+
+5.  click on on the **View Factsheet** button on the `performance.csv` file
+
+  ![](/exercises/ex0/images/performance_viewFactsheet.png)
+
+
+6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv files. The file size should be approx 40kb.
+
+  ![](/exercises/ex0/images/performance_dataPreview.png)
+
+## Summary  
+
+In this exercise you have consolidated a batch of csv files into a single csv file using the List, Read, and Write file operators. By using the Message Filter operator you were also able to gracefully terminate the pipeline when all files have been processed and written to S3. Finally, you were able to verify the correctness of your output using the Metadata Explorer.
+
+[**Click here to move to the next exercise**](/exercises/ex1/README.md)  where you will learn to use the workflow operators to join and aggregate two csv files and store the result in a HANA database.
