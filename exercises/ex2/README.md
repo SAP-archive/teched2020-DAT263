@@ -1,22 +1,22 @@
-# Exercise 2
+# Exercise 2: Joining and writing workflow data to SAP HANA
 ## Description
 
 In this exercise, we will merge the 2 files created in the previous exercise and store the result in a HANA Database. Due to some complexity we split the task into to parts.
 
-1. Read the "performance.csv" from an object store and after a projection and aggregation of the data we store the it to a HANA table.
+1. Read the ``performance.csv`` from an object store and after a projection and aggregation of the data we store the it to a HANA table.
 
-2. Add the "configuration.csv" file and after a projection join it with the "transform" branch of the first part.
+2. Add the ``configuration.csv`` file and after a projection join it with the "transform" branch of the first part.
 
-For this excise you need the operators of the "Structured Data Operators" section and the "Workflow Trigger" and "Workflow Terminator" Operator.  
+In this exercise we will work with the operators found in the **Structured Data Operators** section as well as the **Workflow Trigger** and **Workflow Terminator** operators.  
 
 ![Structured Data Operators](./images/StructureDataOperators.png)
 ![Worflow Operators](./images/WorkflowOperators.png)
 
 ## Exercise Summary
-If you have alread some experience with the "Structured Data Operators" operators then you might like to try it by your own instead of going through the detailed description of the excercises. Here are the main tasks you have to do:
+If you have already some experience with the "Structured Data Operators" operators then you might like to try it by your own instead of going through the detailed description of the exercises. Here are the main tasks you have to do:
 
 ### Exercise 2.1
-1. Read in the file "performance.cvg" of the previous exercise
+1. Read in the file ``performance.csv`` of the previous exercise
 2. Add a "Transform" operator
 3. In the "Transform" operator add a "Projection" operator and name the target columns and convert to the data types ("C0" : "DATE" - date, "C1": "CELLID" - int32, "C2": "KEY1" - float32, "C3": "KEY" - float32
 4. Add a "Aggregation"  operator and automap the input to the target.

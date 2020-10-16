@@ -39,17 +39,11 @@ Provide the exercise content here directly in README.md using [markdown](https:/
 - [Getting Started](exercises/gettingstarted/)
 - [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
     - [Part 1: Preview the source data in Metadata Explorer](exercises/ex1#Part-1-Preview-the-source-data-in-Metadata-Explorer)
-- [Exercise 2 - Joining and aggregation using Data Workflows](exercises/ex2/)
-- [Exercise 3 - Running validation](exercises/ex3/)
+    - [Part 2: Building the pipeline](exercises/ex1#Part-2-Building-the-pipeline)
+    - [Part 3: Executing the pipeline](exercises/ex1#Part-3-Executing-the-pipeline)
+- [Exercise 2: Joining and writing workflow data to SAP HANA](exercises/ex2/)
+- [Exercise 3 - Running a simple data validation](exercises/ex3/)
 
-
-**OR** Link to the PDF document stored in your github repo for example...
-
-Start the exercises [here](exercises/myPDFDoc.pdf).
-
-**OR** Link to the Tutorial Navigator for example...
-
-Start the exercises [here](https://developers.sap.com/tutorials/abap-environment-trial-onboarding.html).
 
 **IMPORTANT**
 
