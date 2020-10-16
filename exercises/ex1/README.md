@@ -1,160 +1,146 @@
-# Exercise 1 
-## Description
+# Exercise 1: Appending multiple source files to a single file
 
-In this exercise, we will merge the 2 files created in the previous exercise and store the result in a HANA Database. Due to some complexity we split the task into to parts. 
+In this exercise, you will use the Metadata Explorer to explorer and view a batch of files stored in an Amazon S3 bucket. Using the Pipeline Modeler you will read the entire of batch of files and consolidate them into a single csv file that will be used in a later exercise.
 
-1. Read the "performance.csv" from an object store and after a projection and aggregation of the data we store the it to a HANA table.
+  ![](./images/completedModel.png)
 
-2. Add the "configuration.csv" file and after a projection join it with the "transform" branch of the first part. 
+## Part 1: Preview the source data in Metadata Explorer
 
-For this excise you need the operators of the "Structured Data Operators" section and the "Workflow Trigger" and "Workflow Terminator" Operator.  
+**Objective**: To better understand the data we will be working in the later sections of this exercise we will first preview the datasets using the Metadata Explorer.
 
-![Structured Data Operators](./images/StructureDataOperators.png)
-![Worflow Operators](./images/WorkflowOperators.png)
+1. Select the Metadata Explorer from the drop-down menu in the top-left of the screen.
 
-## Exercise Summary
-If you have alread some experience with the "Structured Data Operators" operators then you might like to try it by your own instead of going through the detailed description of the excercises. Here are the main tasks you have to do:
+  ![](./images/dropdown_metadataExplorer.png)
 
-### Exercise 1.1
-1. Read in the file "performance.cvg" of the previous exercise
-2. Add a "Transform" operator 
-3. In the "Transform" operator add a "Projection" operator and name the target columns and convert to the data types ("C0" : "DATE" - date, "C1": "CELLID" - int32, "C2": "KEY1" - float32, "C3": "KEY" - float32
-4. Add a "Aggregation"  operator and automap the input to the target. 
-5. Click on the "edit"-icon of the target fields "KEY1" and "KEY2" and choose as "Aggregation Type": AVG. By this you reduce the table to having only a unique record for each day and device ("CELLID"). This you can then later join with the "configuration.csv" file where you have only a daily setting. 
-6. Add a "Project" operator with additional target columns "NOM_KEY1"/float32 and "NOM_KEY2"/float32 and initialize them with "0". Add a filter for the "CELLID" and "DATE" to get finally get only one record for validation. This step is only necessary for an intermediate test.
-7. Add an "output" operator
-8. On the top-most pipeline level add a table producer with your target HANA table (TECHED.\<TECHED_USER>\_CELLSTATUS) and mode overwrite. 
-9. Add a "Workflow Terminator" operator
+2. Click on **Browse Connections**
 
-Save, run and check the result. 
+  ![](./images/browseConnections.png)
 
+3. Select the ```device_performance``` directory. This directory contains all of the source .csv files we will be appending in the next section of this exercise.
 
-## Exercise 1.1 
+  ![](./images/directory_device_performance.png)
 
-### Description
+4. Click on the **View Factsheet** button
 
-After completing these steps you will have created a first projection, aggregation and saving data transformation. 
+  ![](./images/button_viewFactsheet.png)
 
-### Add first 2 operators 
-1. Create a new graph
-2. Add the operators "Workflow Trigger" and "Structured File Consumer" to the canvas and connect them. 
+5. Click on the **Data Preview** button. You should see that our source file contains four unlabelled columns: A timestamp, a device ID, and two columns describing the value of this device.
 
-*Additional info*: the reason for the "Workflow Trigger" is that otherwise the pipeline would not start. There are some operators like the "Structured Data Operator"-operators that needs a nudge others start when the pipeline was initialized. 
+  ![](./images/button_dataPreview.png)
 
-### Configure "Structured File Consumer" operator for read "performance.csv" 
-Open the configuration of the "Structured File Consumer" operator to parameterize it. 
+## Part 2: Building the pipeline
 
-1. Label: 'Performance' - Just to make the pipeline more readable
-2. Storage type (drop-down menu): 'S3'
-3. S3 Connection (click on pencil-icon, opens pop-up window): Configuration Type - Configuration Manager and Connection ID - TechEd2020
-4. S3 source file (click on screen-icon, opens pop-up window) : input/configuration.csv
-5. Click on "Data Preview" for a check if there is the data you want.
-6. Fail on string truncation: True - (Info: For the configuration only a data sample is read and the data types and sizes are inferred. Sometimes it is useful to set this option to 'False)
-7. Fetch size: 1000 (default)
+**Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files. In this section we will read the contents of these sources file and re-write them into a single output csv file.
 
-### Save the pipeline
+1. Return to the  Modeler by using the dropdown menu in the upper left corner of your screen.
+  ![](./images/dropdown_pipelineModeler.png)
 
-1. Click on Save (mid-top of pipeline canvas)
-2. In the pop-up window 'Save' enter: 
-	1. Name: \<TECHUSER\>.MergeCellStatus
-	2. Description: Merge to CellStatus
-	3. Category: <TECHUSER>
-3. Click "OK"
-
-![Structured Data Operators](./images/S1_StructureFileConsumer.png)
-
-### Add Data Transform
-This operator is doing the core part of the whole pipeline. 
-
-1. Add "Data Transform" operator to the pipeline
-2. Draw a line from the outport of the "Structured File Consumer" to the "Data Transform". This results into a creation of an inport of the "Data Transform" operator and a connection. 
-3. Double-click on the gray triangle at the right-bottom of the "Data Transform"-operator. This opens the "Data Transform" configuration canvas. 
-![Structured Data Operators](./images/OpenDataTransformConf.png)
-4. Add the "Projection" operator, link the outport of the "input1" operator to the "Projection" operator and open the configuration of the operator by double-click on the gray-triangle. 
-5. Do an "automapping" and change the name and the data tpyes at the target.
-![Structured Data Operators](./images/TransformConfig.png) with
-	1. C1: "DATE" - date
-	2. C2: "CELLID" - int32
-	3. C3: "KEY1" - float32
-	4. C4: "KEY2" - float32
-6. Go back to the "Data Transform" (click on the link at the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
-7. Add an "Aggregation" operator and connect it to the "Projection" operator. We are now doing an aggregation or groupby that we finally have only one record for each day and device (="CELLID").
-8. Open the "Aggregation" configuration (click on the grey triangle at the bottom left corner).
-9. Automap the input to the target (see 5.) and edit the target fields "KEY1" and "KEY2" (click on edit/pencil-icon) by choosing "AVG" (average) as the "Aggregration Type". By not selecting any "Aggregation Type" the field is implicitly used as a groupby column. ![Structured Data Operators](./images/edit_aggregation.png)
-10. Go back to the "Data Transform" and add again a "Projection" operator and connect it to the "Aggregation" operator. Do again an automapping and add to additional target columns "NOM_KEY1" (float32) and "NOM_KEY2" (float32) by clicking on the plus-icon. For the "Expression" just enter a "0". ![Structured Data Operators](./images/additionalcolumn.png) This step is unnecessary for the final productive pipeline but for developing it is helpful to test intermediate steps.
-11. Add a data filter for a more convenient check of the outcome. Click on the left-top corner "Filter"-link and add a kind of "WHERE"-condition: "CELLID" = 1234512 AND "DATE" = '2020-11-01'. ![Structured Data Operators](./images/datafilter.png) 
-12. Back on the "Transform" canvas right-click on the outport of the last "Projection" operator and add "Create Data target".  ![Structured Data Operators](./images/createdatatarget.png).
-12. With clicking on the "auto-layout" you can straighten your pipeline and with clicking on the configuration icon of the "output" operator you can validate the data outcome of the "Transform" operator. ![Structured Data Operators](./images/transformoutput1.png).
-
-## Configure "Table Producer" operator
-
-1. Now back on the first pipeline layer (back button on the left top corner of the "Transform" canvas) you can add a "Table Producer" operator and connect it to the "Transform" operator.
-2. For configuring the "Table Producer" you just need to open the configuration window by clicking on the common parameter-icon and enter the following configuration: 
-	1. Label: HANA CELLSTATUS (or your description term)
-	2. Database type: HANA
-	3. HANA Connection: Configuration Type : Configuration Manager and connection ID: "HANA_CLOUD_TECHED"
-	4. HANA Target Table: TECHED.\<TECHED_USER>\_CELLSTATUS. **Do not** select an existing table by clicking on the "screen"-icon but enter the name of the table literally. This creates an non-existant table using the data and data types provided by the input data.
-	4. Mode: overwrite - creates a new table or overwrites an existing table with the new table structure. 
-	5. Batch size: 1000 (default) 
-
-## Final Step
-1. Add and connect a "Workflow Terminator" and you are done. ![Structured Data Operators](./images/finalpipeline1.png)
-
-Now you can save and run the pipeline and checking the result with the **Metadata Explorer**. According to the filter of this example you should see only one record. 
-	
+2. Create a new graph by first selecting the `Graphs` tab (shown vertically) and then the **+** button.
+  ![](./images/createGraph.png)
 
 
-## Exercise 1.2
+3. When creating a new graph the modeler should automatically switch to the `Operators` tab (shown vertically), if not then select it. Use the search field to find the `List Files` and drag drop it into the new graph.
+  ![](./images/operator_listFiles.png)
 
-### Description
+4. The `List Files` operator takes a directory as an input or configurable parameter and outputs a list of all files and sub-directories in a given storage service such as Amazon S3 buckets. You can view more information about this operator by right clicking it and select `Open Documentation`.
 
-The second part of the exercise is to add a join with the configuration-file in order to compare the daily settings with the average of performance send during the day. The latter and more complicated part has been accomplished already. You learnt the general concept of the "Structured Data Operators" therefore the following exercise might be much easier. 
+  ![](./images/doc_listFiles.png)
 
-### Read the configuration.csv file
-Follow the **Exercise 1.1** : 
+5. Like many other operators the `List File` operator will by default read configuration parameters from its input node `dirRef` during runtime. However, in this exercise the parameters will be provided during design time:
+  - Configure the `List Files` operator by right clicking and selecting `Open Configuration`
+  - Set the list operation to occur only `Once`
+  - Select the **pencil icon** to define which storage account to read from.
 
-* *Add first 2 operators*  and 
-* *Configure "Structured File Consumer" operator for read "performance.csv"*  
+  ![](./images/configure_listFiles.png)
 
-but use instead the file "configuration.csv" generated in the **Exercise 0** and for the "Label" use "Configuration".
+6. Set the **Configuration Type** to `Connection Management`  and **Connection ID** to `TechEd2020_S3`x and select **Save**
+ ![](./images/s3_Connection.png)
 
-### Add new Input to the existing "Data Transform" operator
+7. Browse the connection by clicking on the **monitor icon** and select the path directory `/device_performance` and click **Save**
 
-For adding a new input to the existing "Data Transform" operator drag a connection from the output of the "Structured File Consumer" into the "Data Transform" operator and a new inport is created. 
+8. Now would be a great time to save your progress. Click on the **floppy disk** icon located in the toolbar at the top of the screen. Enter the name `FileCollection_TAxx` where xx is the ID assigned to you at the beginning of the workshop.
 
-### Adjust the "Data Transform" Operator
+  ![](./images/saveGraph.png)
 
-When opening the "Data Transform" operator canvas you see a second input operator "input2" that provides the read data from the configuration file. 
+9. Use the search field to find the `Read File` operator. Drag and drop it into your graph. This operator reads the contents of files from various storage services.
 
-1. Add a new "Projection" operator and connect it to the new "input2" operator
-2. Configure the "Projector" operator 
-	1. "Automap" to target
-	2. Change the names and data tpyes at the target.
-		1. C1: "DATE" - date
-		2. C2: "CELLID" - int32
-		3. C3: "NOM_KEY1" - float32
-		4. C4: "NOM_KEY2" - float32
-3. Add a "Join" operator and connect the new "Projection2" operator to the top inport of the "Join" operator
-4. Remove the connection from the "Aggregation" output operator to the "Projection1" operator by clicking on the connection to mark it and then right-click to remove it. ![remove connections](./images/removeconnection.png)
-5. Connect the outport of the "Aggregation" operator with the bottom inport of the "Join" operator
-6. Configure the "Join" operator
-	1. In the Definition view join both input "DATE" columns by dragging one join column to the other. 
-	2. In the opened "Join Definition" section you see the join: "Join_Input1"."DATE" = "Join_Input2"."DATE". This should be completed with the additional join of the "CELLID"s: "Join_Input1"."DATE" = "Join_Input2"."DATE" AND "Join_Input1"."CELLID" = "Join_Input2"."CELLID" ![Structured Data Operators](./images/joinoperator.png)
-	3. Switch to "Columns" view (left top corner link)
-	4. Automap to target
-	5. Remove one "DATE" and one "CELLID" target column by marking the target column and clicking on the wastebasket icon ![Joined columns](./images/joincolumns.png)
-7. Connect the "Join" outport with the inport of the "Projection1" that is sending its output to the "output" operator. 
-8. Open the "Projection" configuration and map the source columns "NOM_KEY1" and "NOM_KEY2" to the corresonding target columns. ![Connect new columns](./images/connectnewcolumns.png)
-9. Go back to the first pipeline layer, same the graph and start it. 
+  ![](./images/operator_readFile.png)
 
-Again you should see one record if still the filtering is place but this time all columns with values. 
+10. The file path to be read by the `Read File` operator can be provided either via its input node at runtime or configured at design time. In this exercise we will provide the path at runtime using the `List File` operator. Connect the output node `ref`  to the input node of the `Read Operator`
 
-**Attention!** If you have duplicate rows you might consider that the input has already duplicate rows. Because the pipeline of Exercise0 was just appending to the target file you get multiple records when run multiple times. You always have to delete any existing target file first. 
+11. Use the search field to find the `Write File` operator.  Drag and drop it into your graph. The `Write File` operator writes any content that is provided to its input node as a file to various object store services. Connect the output node `file` to the input node of the `Write File` operator.
+
+12. Like the `Read File` operator the `Write File` operator can be configured at runtime or design time. In this exercise we will provide the target directory at design time.
+- Select **Path Mode** to `Static`
+- Click on the **pencil button** to select the `TechEd2020_S3` connection.
+- Set **Mode** to `Append`
+- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/input/performance.csv`
+- *\[Optional\]* You can change the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
+  ![](./images/configure_writeFile.png)
+
+13. When the `Write File` operator has successfully written the last batch of data it will mark its last output with an attribute `lastBatch`. We can use this as a trigger to safely terminate the pipeline.
+  - Use the search field to find the `Message Filter` operator, drag and drop it into your graph.
+  - Connect the `file` output node to its input node
+  - Because the output node is of different datatype than the input node you will be prompted select to conversion method: Choose `From File (com.sap.from.File)`
+
+  ![](./images/operator_messageFilter.png)
+
+  ![](./images/conversion_fromFile.png)
+
+14. Right click the `Message Filter` operator, select the **Open Configuration** button, and then click the **penctil button** define which condition to filter for.
+
+  ![](./images/configure_messageFilter.png)
+
+15. Copy/paste the following json code snippet into the text editor and click **Save**
+  ```
+  {
+  	"message.lastBatch": true
+  }
+  ```
+  ![](./images/editProperty_messageFilter.png)
 
 
-## Summary
+16. Use the search field to find the `Graph Terminator` operator. Drag and drop it into your graph. This operator will terminate the pipeline execution when receiving any input to its input node. Connect the output node of the `Message Filter` to the input node of the `Graph Terminator`.
 
-You've now actually created a rather complex data transformation from 2 different data sources, with joins, aggregation and filtering and storing it to a different type of storage. 
+  ![](./images/operator_graphTerminator.png)
 
-Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
+  Since the `Message Operator` is filtering out all messages that do not contain the `lastBatch` attribute the graph will not be terminated until we are sure that the last batch was written by the  for the `Write File` operator.
 
+17. Save the graph by clicking on the **floppy disk** icon located in the toolbar at the top of the screen.
+
+  ![](./images/saveGraphAgain.png)
+
+## Part 3: Executing the pipeline
+
+Now that you've created a complete graph it is time to execute it and look at the output data.
+
+1. To execute the pipeline click on the **play button** at the top of the screen. The pipeline will appear under the **Status** tab. It will first appear to be in status ``Pending`` and then after a few seconds ``Running``.
+
+  ![](./images/runGraph.png)
+
+2. If the pipeline did not run into any errors then the execution should reach the `Graph Terminator` operator and the status will eventually switch to status `Completed`.
+
+  **Tip:** *If the pipeline terminates with an error you can click on the title of the failed graph to view a detailed error message.*
+
+  ![](./images/deadGraph.png)
+
+3. After the pipeline reaches status `Completed` return to the **Metdata Explorer** using the drop-down menu in the top left corner of the screen.
+
+  ![](./images/goTometadataExplorer.png)
+
+4. Click on **Browse Connections** and navigate to the `/input/` directory in the `TechEd2020_S3` connection.
+
+5.  click on on the **View Factsheet** button on the `performance.csv` file
+
+  ![](./images/performance_viewFactsheet.png)
+
+
+6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv files. The file size should be approx 40kb.
+
+  ![](./images/performance_dataPreview.png)
+
+## Summary  
+
+In this exercise you have consolidated a batch of csv files into a single csv file using the List, Read, and Write file operators. By using the Message Filter operator you were also able to gracefully terminate the pipeline when all files have been processed and written to S3. Finally, you were able to verify the correctness of your output using the Metadata Explorer.
+
+[**Click here to move to the next exercise**](/exercises/ex2/README.md)  where you will learn to use the workflow operators to join and aggregate two csv files and store the result in a HANA database.
