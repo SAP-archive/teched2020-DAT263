@@ -149,13 +149,12 @@ When opening the "Data Transform" operator canvas you see a second input operato
 
 Again you should see one record if still the filtering is place but this time all columns with values. 
 
-**Attention!** If you have duplicate rows you might consider that the input has already duplicate rows. Because the pipeline was just appending to the target file you get multiple records. You always have to delete any existing files first. 
-
+**Attention!** If you have duplicate rows you might consider that the input has already duplicate rows. Because the pipeline of Exercise0 was just appending to the target file you get multiple records when run multiple times. You always have to delete any existing target file first. 
 
 
 ## Summary
 
-You've now ...
+You've now actually created a rather complex data transformation from 2 different data sources, with joins, aggregation and filtering and storing it to a different type of storage. 
 
 Continue to - [Exercise 2 - Exercise 2 Description](../ex2/README.md)
 
