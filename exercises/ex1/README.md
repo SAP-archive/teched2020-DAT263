@@ -126,6 +126,32 @@ For adding a new input to the existing "Data Transform" operator drag a connecti
 
 When opening the "Data Transform" operator canvas you see a second input operator "input2" that provides the read data from the configuration file. 
 
+1. Add a new "Projection" operator and connect it to the new "input2" operator
+2. Configure the "Projector" operator 
+	1. "Automap" to target
+	2. Change the names and data tpyes at the target.
+		1. C1: "DATE" - date
+		2. C2: "CELLID" - int32
+		3. C3: "NOM_KEY1" - float32
+		4. C4: "NOM_KEY2" - float32
+3. Add a "Join" operator and connect the new "Projection2" operator to the top inport of the "Join" operator
+4. Remove the connection from the "Aggregation" output operator to the "Projection1" operator by clicking on the connection to mark it and then right-click to remove it. ![remove connections](./images/removeconnection.png)
+5. Connect the outport of the "Aggregation" operator with the bottom inport of the "Join" operator
+6. Configure the "Join" operator
+	1. In the Definition view join both input "DATE" columns by dragging one join column to the other. 
+	2. In the opened "Join Definition" section you see the join: "Join_Input1"."DATE" = "Join_Input2"."DATE". This should be completed with the additional join of the "CELLID"s: "Join_Input1"."DATE" = "Join_Input2"."DATE" AND "Join_Input1"."CELLID" = "Join_Input2"."CELLID" ![Structured Data Operators](./images/joinoperator.png)
+	3. Switch to "Columns" view (left top corner link)
+	4. Automap to target
+	5. Remove one "DATE" and one "CELLID" target column by marking the target column and clicking on the wastebasket icon ![Joined columns](./images/joincolumns.png)
+7. Connect the "Join" outport with the inport of the "Projection1" that is sending its output to the "output" operator. 
+8. Open the "Projection" configuration and map the source columns "NOM_KEY1" and "NOM_KEY2" to the corresonding target columns. ![Connect new columns](./images/connectnewcolumns.png)
+9. Go back to the first pipeline layer, same the graph and start it. 
+
+Again you should see one record if still the filtering is place but this time all columns with values. 
+
+**Attention!** If you have duplicate rows you might consider that the input has already duplicate rows. Because the pipeline was just appending to the target file you get multiple records. You always have to delete any existing files first. 
+
+
 
 ## Summary
 
