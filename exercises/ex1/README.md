@@ -35,13 +35,13 @@ Save, run and check the result.
 
 After completing these steps you will have created a first projection, aggregation and saving data transformation. 
 
-### Add first 2 operators
+### Add first 2 operators 
 1. Create a new graph
 2. Add the operators "Workflow Trigger" and "Structured File Consumer" to the canvas and connect them. 
 
 *Additional info*: the reason for the "Workflow Trigger" is that otherwise the pipeline would not start. There are some operators like the "Structured Data Operator"-operators that needs a nudge others start when the pipeline was initialized. 
 
-### Configure "Structured File Consumer" operator
+### Configure "Structured File Consumer" operator for read "performance.csv" 
 Open the configuration of the "Structured File Consumer" operator to parameterize it. 
 
 1. Label: 'Performance' - Just to make the pipeline more readable
@@ -104,8 +104,27 @@ Now you can save and run the pipeline and checking the result with the **Metadat
 	
 
 
+## Exercise 1.2
 
+### Description
 
+The second part of the exercise is to add a join with the configuration-file in order to compare the daily settings with the average of performance send during the day. The latter and more complicated part has been accomplished already. You learnt the general concept of the "Structured Data Operators" therefore the following exercise might be much easier. 
+
+### Read the configuration.csv file
+Follow the **Exercise 1.1** : 
+
+* *Add first 2 operators*  and 
+* *Configure "Structured File Consumer" operator for read "performance.csv"*  
+
+but use instead the file "configuration.csv" generated in the **Exercise 0** and for the "Label" use "Configuration".
+
+### Add new Input to the existing "Data Transform" operator
+
+For adding a new input to the existing "Data Transform" operator drag a connection from the output of the "Structured File Consumer" into the "Data Transform" operator and a new inport is created. 
+
+### Adjust the "Data Transform" Operator
+
+When opening the "Data Transform" operator canvas you see a second input operator "input2" that provides the read data from the configuration file. 
 
 
 ## Summary
