@@ -28,4 +28,6 @@ Now you can run the whole jupyter notebook and do your own research.
 
 In this exercise you have learnt how to create a ML Scenario and a Jupyter Notebook, connect to a HANA database via the SAP Data Intelligence Connection and do some data analysis. 
 
+[Exercise 5](../ex5/README.md)
+
 

@@ -11,11 +11,13 @@ In this exercise we create a RestAPI that could be called by devices to save the
 
 ## Exercise Summary
 
-Creating a Pipeline with a web-service that can be called externally and hands-over the data to an operator for some processing before calling an operator for saving the data. 
+Creating a Pipeline with a web-service that can be called externally and hand over the data to an operator for some processing before calling an operator for saving the data. 
 
 In order to test the Rest-API a client application is provided that generates example data and sends it to the web-service. 
 
 ## Exercise 4.1
+
+
 
 ## Summary
 
