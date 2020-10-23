@@ -89,14 +89,62 @@ curl --location --request POST 'https://vsystem.ingress.dh-ia37o5zq.dhaas-live.s
 5. When the pipeline is running, send the curl command
 6. The received request is saved to the specified file and the pipeline terminates
 7. Check the file. 
+
+### Python client
+
  
+## Exercise 4.1
+
+Adding a "Python3 Operator" that processes the received data and sends it to "Write File" operator for appending the data to the existing 'input/\<di_user\>/performance.csv'. A response is also created but not used for this use case. 
+
+1. Add a "Python3 Operator" and add 
+	1. inport: 'input'/message
+	2. outport: 'output'/message
+	3. outport: 'response'/message
+
+2. Put the new "Python3 Operator" into the pipeline between the "OpenAPI Servlow" (or Wiretap) and the "To File" converter. An connect the outport "output" with the latter. 
+
+3. Change the configuration of the "Write File" operator to */input/\<di_user\>/performance.csv*
+
+3. Open script of "Python3 Operator" and copy the following script: 
+
+```
+import json
+import sys
+
+def on_input(msg):
+    
+    #prepare for a response message
+    attributes = {}
+    for key in msg.attributes :
+        # only copy the headers that won't interfer with the recieving operators
+        if not "openapi.header" in key  or  key == "openapi.header.x-request-key" : 
+             attributes[key] = msg.attributes[key]
+    
+    # Send data to output and response
+    # In case of a body with wrong format exceptions are caught to avoid a pipeline crash
+    try : 
+        devdata = json.loads(msg.body)
+        str_line = devdata['TIMESTAMP'] + ',' +  str(devdata['CELLID']) + ','+ str(devdata['KEY1'])  + ','  + str(devdata['KEY2']) + '\n'
+        api.send("output", api.Message(attributes={'content':'csv'},body=str_line))
+        api.send("response",api.Message(attributes=attributes,body=str_line))
+    except ValueError as e: 
+        error_str = "Value Error: {}\n{}".format(e,msg.body)
+        api.send("log",error_str)
+        api.send("response",api.Message(attributes=attributes,body=error_str))
+    except json.decoder.JSONDecodeError as e: 
+        error_str = "JSONDecodeError: {}\n{}".format(e,msg.body)
+        api.send("log",error_str)
+        api.send("response",api.Message(attributes=attributes,body=error_str))
 
 
+api.set_port_callback("input", on_input)
 
+```
 
+![restapi2](./images/restapi2.png)
 
-
-	 	
+Now you can save, run and test the RestAPI pipeline as done in the previous section.
 
 
 ## Summary
