@@ -92,6 +92,16 @@ curl --location --request POST 'https://vsystem.ingress.dh-ia37o5zq.dhaas-live.s
 
 ### Python client
 
+If you have a python-egine installed on your local system then you could also use the script that you have downloaded from this GitHub repository together with the Jupyter Notebook: [scripts.zip](../../scripts.zip).
+
+First you have to ensure that the url in the script is the right one. Open the script with a text editor and verify and adjust the url described in the section Postman/Request URL.
+
+Start the RestAPI pipeline and wenn running then start the script in a terminal with: 
+
+```
+python3 ./celldata.py --cellid 1234512 --user <di_user> --pwd <password>
+```
+
  
 ## Exercise 4.1
 
@@ -149,6 +159,6 @@ Now you can save, run and test the RestAPI pipeline as done in the previous sect
 
 ## Summary
 
-You have learnt an alternative way to read and write to a HANA database as with the "Structured Data Operators" of the previous exercise. We used the "Validation Rule" operator to do simple data quality checks and finally how to use a python custom operator to leverage all the options provided by an advanced script. 
+You have learnt how to setup a RestAPI and sending data to it. 
 
 
