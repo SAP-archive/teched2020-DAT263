@@ -1,6 +1,6 @@
 # Exercise 1: Appending multiple source files to a single file
 
-In this exercise, you will use the Metadata Explorer to explorer and view a batch of files stored in an Amazon S3 bucket. Using the Pipeline Modeler you will read the entire of batch of files and consolidate them into a single csv file that will be used in a later exercise.
+In this exercise, you will use the Metadata Explorer to explore and view a batch of files stored in an Amazon S3 bucket. Then, using the Pipeline Modeler you will read this entire of batch of files and consolidate them into a single csv file that will be used in a later exercise.
 
   ![](./images/completedModel.png)
 
@@ -8,7 +8,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 
 **Objective**: To better understand the data we will be working in the later sections of this exercise we will first preview the datasets using the Metadata Explorer.
 
-1. Select the Metadata Explorer from the drop-down menu in the top-left of the screen.
+1. Select the Metadata Explorer from the drop-down menu in the top-left of the screen or by clicking on the Metadata Explorer tile in the Launchpad.
 
   ![](./images/dropdown_metadataExplorer.png)
 
@@ -16,7 +16,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 
   ![](./images/browseConnections.png)
 
-3. Select the ```device_performance``` directory. This directory contains all of the source .csv files we will be appending in the next section of this exercise.
+3. Select the ```device_performance``` directory. This directory contains all of the source .csv files that we will be appending in the next section of this exercise.
 
   ![](./images/directory_device_performance.png)
 
@@ -30,7 +30,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 
 ## Part 2: Building the pipeline
 
-**Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files. In this section we will read the contents of these sources file and re-write them into a single output csv file.
+**Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files that contain four columns. In this section we will read the contents of these sources file and re-write them into a single output csv file.
 
 1. Return to the  Modeler by using the dropdown menu in the upper left corner of your screen.
   ![](./images/dropdown_pipelineModeler.png)
@@ -39,7 +39,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
   ![](./images/createGraph.png)
 
 
-3. When creating a new graph the modeler should automatically switch to the `Operators` tab (shown vertically), if not then select it. Use the search field to find the `List Files` and drag drop it into the new graph.
+3. When creating a new graph the modeler should automatically switch to the `Operators` tab (shown vertically), if not then select it. Use the search field to find the `List Files` operator and drag-and-drop it into the new empty graph.
   ![](./images/operator_listFiles.png)
 
 4. The `List Files` operator takes a directory as an input or configurable parameter and outputs a list of all files and sub-directories in a given storage service such as Amazon S3 buckets. You can view more information about this operator by right clicking it and select `Open Documentation`.
@@ -53,7 +53,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 
   ![](./images/configure_listFiles.png)
 
-6. Set the **Configuration Type** to `Connection Management`  and **Connection ID** to `TechEd2020_S3`x and select **Save**
+6. Set the **Configuration Type** to `Connection Management`  and **Connection ID** to `TechEd2020_S3` and select **Save**
  ![](./images/s3_Connection.png)
 
 7. Browse the connection by clicking on the **monitor icon** and select the path directory `/device_performance` and click **Save**
@@ -75,7 +75,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 - Click on the **pencil button** to select the `TechEd2020_S3` connection.
 - Set **Mode** to `Append`
 - Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/input/performance.csv`
-- *\[Optional\]* You can change the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
+- *\[Optional\]* You can rename the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
   ![](./images/configure_writeFile.png)
 
 13. When the `Write File` operator has successfully written the last batch of data it will mark its last output with an attribute `lastBatch`. We can use this as a trigger to safely terminate the pipeline.
@@ -87,7 +87,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 
   ![](./images/conversion_fromFile.png)
 
-14. Right click the `Message Filter` operator, select the **Open Configuration** button, and then click the **penctil button** define which condition to filter for.
+14. Right click the `Message Filter` operator, select the **Open Configuration** button, and then click the **pencil button** define which condition to filter for.
 
   ![](./images/configure_messageFilter.png)
 
@@ -112,7 +112,7 @@ In this exercise, you will use the Metadata Explorer to explorer and view a batc
 
 ## Part 3: Executing the pipeline
 
-Now that you've created a complete graph it is time to execute it and look at the output data.
+Now that you've completed designing your graph it is time to execute it and inspect the output data.
 
 1. To execute the pipeline click on the **play button** at the top of the screen. The pipeline will appear under the **Status** tab. It will first appear to be in status ``Pending`` and then after a few seconds ``Running``.
 
@@ -130,12 +130,12 @@ Now that you've created a complete graph it is time to execute it and look at th
 
 4. Click on **Browse Connections** and navigate to the `/input/` directory in the `TechEd2020_S3` connection.
 
-5.  click on on the **View Factsheet** button on the `performance.csv` file
+5. Click on on the **View Factsheet** button on the `performance.csv` file
 
   ![](./images/performance_viewFactsheet.png)
 
 
-6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv files. The file size should be approx 40kb.
+6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv file (The file size should be approx 41kb)
 
   ![](./images/performance_dataPreview.png)
 
