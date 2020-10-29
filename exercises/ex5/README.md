@@ -15,7 +15,7 @@ Creating a Pipeline with a web-service that can be called externally and hand ov
 
 In order to test the Rest-API a client application is provided that generates example data and sends it to the web-service. Of course also the "postman" application can be used or the terminal command "curl". 
 
-## Exercise 4.1
+## Exercise 5.1
 Each running pipeline consumes a node in the cluster. Due to the limited size of our workshop-cluster we ask you kindly to ensure that the web-service pipeline is only running as short as possible. For testing purpose we write the web-service response to a file and then terminate the graph. 
 
 Creating the basic RestAPI:
@@ -102,8 +102,12 @@ Start the RestAPI pipeline and wenn running then start the script in a terminal 
 python3 ./celldata.py --cellid 1234512 --user <di_user> --pwd <password>
 ```
 
+### HTML Test Page
+
+The easiest way to test the RestAPI is using the 
+
  
-## Exercise 4.1
+## Exercise 5.2
 
 Adding a "Python3 Operator" that processes the received data and sends it to "Write File" operator for appending the data to the existing 'input/\<di_user\>/performance.csv'. A response is also created but not used for this use case. 
 
@@ -136,8 +140,8 @@ def on_input(msg):
     try : 
         devdata = json.loads(msg.body)
         str_line = devdata['TIMESTAMP'] + ',' +  str(devdata['CELLID']) + ','+ str(devdata['KEY1'])  + ','  + str(devdata['KEY2']) + '\n'
-        api.send("output", api.Message(attributes={'content':'csv'},body=str_line))
-        api.send("response",api.Message(attributes=attributes,body=str_line))
+        api.send("output", str_line)
+        api.send("response",api.Message(attributes=attributes,body=msg.body))
     except ValueError as e: 
         error_str = "Value Error: {}\n{}".format(e,msg.body)
         api.send("log",error_str)
