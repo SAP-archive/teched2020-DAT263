@@ -104,7 +104,14 @@ python3 ./celldata.py --cellid 1234512 --user <di_user> --pwd <password>
 
 ### HTML Test Page
 
-The easiest way to test the RestAPI is using the 
+The easiest way to test the RestAPI is using the page we created to test the restapi [Test Page (sendcelldata.cfapps.eu10.hana.ondemand.com)]
+(sendcelldata.cfapps.eu10.hana.ondemand.com).
+
+![Test Page](./images/TestRestAPI.png)
+
+![Response Page](./images/ResponseTestRestAPI.png)
+
+
 
  
 ## Exercise 5.2
