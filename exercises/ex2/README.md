@@ -140,7 +140,7 @@ This operator is doing the core part of the whole pipeline.
 	3. **HANA Connection**:
 		- **Configuration Type** : `Configuration Manager`
 		- **Connection ID**: `HANA_CLOUD_TECHED`
-	4. **HANA Target Table**: `TECHED.\<TECHED_USER>\_CELLSTATUS`. **Do not** select an existing table by clicking on the "screen"-icon but enter the name of the table literally. This creates an non-existant table using the data and data types provided by the input data.
+	4. **HANA Target Table**: `TECHED.<TECHED_USER>_CELLSTATUS`. **Do not** select an existing table by clicking on the "screen"-icon but enter the name of the table literally. This creates an non-existant table using the data and data types provided by the input data.
 	4. **Mode**: `overwrite` - creates a new table or overwrites an existing table with the new table structure.
 	5. **Batch size**: `1000` (default)
 
