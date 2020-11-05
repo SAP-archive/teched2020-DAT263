@@ -52,10 +52,20 @@ display(dfc)
 ```
 
 #### Access Data on DI Data Lake
-Please change the path to your folder: `/shared/Teched2020/<TED_USER>/performance.csv'
+If you want to access the csv-files you have created from the Jupyter Notebook you currently have to store them first in the `DI_DATA_LAKE`.
+
+Remark: This might be changed in the next releases so you can access more connections of the Connection Management.  
+
+ For this you can 
+
+1. use the download and upload feature of the Metadata Explorer or 
+2. change the target of your pipline that you have created in Exercise 2
+
+The code could then look like the following: 
+
 ```
 client = InsecureClient('http://datalake:50070')
-with client.read('/shared/Teched2020/performance.csv', encoding='utf-8') as reader:
+with client.read('/shared/Teched2020/TED_USER/performance.csv', encoding='utf-8') as reader:
    df_p = pd.read_csv(reader)
 display(df_p)
 ```
