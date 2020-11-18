@@ -23,7 +23,7 @@ If you like to try it first by your own then here is the short summary of the ta
 1. Read the table `CELLSTATUS` created in [exercise 2](../ex2/README.html)
 2. Add the `Validation Rule` operator and configure such that the values of the columns `KEY1` and `KEY2` must be greater than 0. The failed records should be channeled to the `fail`-outport.
 3. Add a `Python3` operator and program it to create a new record for each failed record and send it to the outport as csv-string. The columns structure is as follows:
-		("TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID")
+	`("TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID")`
 4. Save the "service ticket" string to the HANA table `QMTICKET`
 
 ## Exercise 3.1
@@ -67,7 +67,7 @@ If you like to try it first by your own then here is the short summary of the ta
 	![configvrschema](./images/Configvrschema.png)
 3. Return to the operator's configuration menu and edit **Rules**:
 	- Add the following rule:
-	
+
 	|Column|Condition|Value|Fail Action|
 	|------|---------|-----|-----------|
 	|KEY1  |>        |0    |FAIL       |
