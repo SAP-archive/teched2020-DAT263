@@ -54,6 +54,7 @@ If you like to try it first by your own then here is the short summary of the ta
 2. Configure the **Input Schema**: Click on *Edit*
 	- In the new configuration window "Edit property 'Input Schema'
 	- Add for each table column an item:
+
 	|Name|Type|
 	|----|----|
 	|DATE|String (Length 10)|
@@ -65,7 +66,8 @@ If you like to try it first by your own then here is the short summary of the ta
 
 	![configvrschema](./images/Configvrschema.png)
 3. Return to the operator's configuration menu and edit **Rules**:
-	- Add the following rule :
+	- Add the following rule:
+	
 	|Column|Condition|Value|Fail Action|
 	|------|---------|-----|-----------|
 	|KEY1  |>        |0    |FAIL       |

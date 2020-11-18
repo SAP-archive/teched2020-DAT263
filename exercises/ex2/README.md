@@ -213,4 +213,4 @@ Again you should see only one record if you chose to apply the the filter but th
 
 You've now actually created a rather complex data transformation from two different data sources, with joins, aggregation and filtering and storing it to a different type of storage.
 
-Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
+Continue to - [Exercise 3](../ex3/README.md)

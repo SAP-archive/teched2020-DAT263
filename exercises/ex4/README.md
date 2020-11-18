@@ -12,7 +12,8 @@ In order to understand better the data you receive from the devices and develop 
 3. You will be taken to the **Scenario Details** page. Scroll down to the *Notebooks* section and create a new notebook ![Create Scenario](./images/createjn.png), enter any name and when prompted select python3 kernel.
 
 4. Download the [scripts.zip](../../scripts.zip) file. There is a Jupyter Notbook that you can upload: `qm_analysis_cellstatus.ipynb` ![upload](./images/uploadjn.png)
-5. Under section *Connection to Data Source* modify the table-name `CELLSTATUS` to `<TECHED_USER>_CELLSTATUS` to reflect your assigned user ID ![connect_change](./images/connect_change.png)
+5. Under section *Connection to Data Source* modify the table-name `CELLSTATUS` to `<TECHED_USER>_CELLSTATUS` to reflect your assigned user ID
+ ![connect_change](./images/connect_change.png)
 5. You can execute the code in a selected by clicking on the run-button on the icon-bar. Starting from the top do this for every cell in this notebook ![run_cell](./images/run_cells_jnb.png)
 6. At the end of this Jupyter notebook you find blank cells where you can either do your own research or copy/paste the provided code snippets to query and manipulate the data further.
 
