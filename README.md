@@ -20,29 +20,26 @@ This session introduces attendees to use the **SAP Data Intelligence Modeler** t
 
 4. In order to improve the quality check a data scientist should be able to do an analysis of the IoT data to eventually developer an early alert schema.
 
-5. The central device configuration and performance table should be exposed via a webservice to retrieve the device status from outside.
+5. The central device configuration and performance table should be exposed via a web service to retrieve the device status from outside.
 
 ### Acquired Skills
-After having done all the tasks you are familiar with the general concept of **SAP Data Intelligence Modeler **
+After having done all the tasks you are familiar with the general concept of **SAP Data Intelligence Modeler**
 
 
 ## Requirements
 
   * Login credentials to SAP Data Intelligence (Handed out at the beginning of the session)
-  * Chrome browser (Recommended)
+  * [Chrome browser (Recommended)](https://www.google.com/chrome/)
 
 
 ## Exercises
 
-Provide the exercise content here directly in README.md using [markdown](https://guides.github.com/features/mastering-markdown/) and linking to the specific exercise pages, below is an example.
-
 - [Getting Started](exercises/gettingstarted/)
 - [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
-    - [Part 1: Preview the source data in Metadata Explorer](exercises/ex1#Part-1-Preview-the-source-data-in-Metadata-Explorer)
-    - [Part 2: Building the pipeline](exercises/ex1#Part-2-Building-the-pipeline)
-    - [Part 3: Executing the pipeline](exercises/ex1#Part-3-Executing-the-pipeline)
 - [Exercise 2: Joining and writing workflow data to SAP HANA](exercises/ex2/)
 - [Exercise 3 - Running a simple data validation](exercises/ex3/)
+- [Exercise 4 - Analyse the Data with Jupyter Notebook](exercises/ex4)
+- [Exercise 5 - Sending Device Data via RestAPI](exercises/ex5)
 
 
 ## How to obtain support
