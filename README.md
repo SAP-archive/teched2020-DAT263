@@ -36,7 +36,7 @@ After having done all the tasks you are familiar with the general concept of **S
 
 - [Getting Started](exercises/gettingstarted/)
 - [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
-- [Exercise 2: Joining and writing workflow data to SAP HANA](exercises/ex2/)
+- [Exercise 2 - Joining and writing workflow data to SAP HANA](exercises/ex2/)
 - [Exercise 3 - Running a simple data validation](exercises/ex3/)
 - [Exercise 4 - Analyse the Data with Jupyter Notebook](exercises/ex4)
 - [Exercise 5 - Sending Device Data via RestAPI](exercises/ex5)
