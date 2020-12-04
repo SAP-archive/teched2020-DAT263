@@ -58,7 +58,7 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 
 7. Browse the connection by clicking on the **monitor icon** and select the path directory `/device_performance` and click **Save**
 
-8. Now would be a great time to save your progress. Click on the **floppy disk** icon located in the toolbar at the top of the screen. Enter the name `FileCollection_TAxx` where xx is the ID assigned to you at the beginning of the workshop.
+8. Now would be a great time to save your progress. Click on the **floppy disk** icon located in the toolbar at the top of the screen. Enter the name `FileCollectionPerformance_TAxx` where xx is the ID assigned to you at the beginning of the workshop.
 
   ![](./images/saveGraph.png)
 
@@ -72,9 +72,9 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 
 12. Like the `Read File` operator the `Write File` operator can be configured at runtime or design time. In this exercise we will provide the target directory at design time.
 - Select **Path Mode** to `Static`
-- Click on the **pencil button** to select the `TechEd2020_S3` connection.
+- Click on the **pencil button** to select the `DI_DATA_LAKE` connection.
 - Set **Mode** to `Append`
-- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/input/performance.csv`
+- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/TAxx/performance.csv` (TAxx = your user)
 - *\[Optional\]* You can rename the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
   ![](./images/configure_writeFile.png)
 
@@ -128,16 +128,25 @@ Now that you've completed designing your graph it is time to execute it and insp
 
   ![](./images/goTometadataExplorer.png)
 
-4. Click on **Browse Connections** and navigate to the `/input/` directory in the `TechEd2020_S3` connection.
+4. Click on **Browse Connections** and navigate to the `/input/TAxx` directory in the `TechEd2020_S3` connection.
 
 5. Click on on the **View Factsheet** button on the `performance.csv` file
 
   ![](./images/performance_viewFactsheet.png)
 
 
-6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv file (The file size should be approx 41kb)
+6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv file (The file size should be approx 83kb)
 
   ![](./images/performance_dataPreview.png)
+  
+## Part 4: Copy Pipeline 
+We need the same data pipeline for consolidating the configuration files into on `configuration.csv`-file.
+
+1. 'Save as..' the previous pipeline and name it to `FileCollectionConfiguration_TAxx`. Click on the **floppy disk** icon located in the toolbar at the top of the screen. 
+2. Change the configuration-parameters: 
+	1. "List-Files" operator, Path: "/device_configuration"
+	2. "Write File" operator, Path: "/shared/TAxx/configuration.csv"
+3. Run pipeline to create the configuration.csv-File
 
 ## Summary  
 

@@ -50,12 +50,12 @@ After completing these steps you will have created a first projection, aggregati
 Right click the `Structured File Consumer` operator and open the configuration menu to parameterize it.
 
 1. (Optional) Rename the **Label** to `Performance`. This makes the pipeline more readable
-2. Set **Storage type** (drop-down menu): `S3`
+2. Set **Storage type** (drop-down menu): `sdl`
 3. In S3 Connection, click on pencil-icon and set
 	* **Configuration Type**: `Configuration Manager`
-	* **Connection ID**:  `TechEd2020_S3`
+	* **Connection ID**:  `DI_DATA_LAKE`
 	* Save
-4. Select the S3 source file by clicking on **monitor-icon** : `/input/performance.csv`
+4. Select the S3 source file by clicking on **monitor-icon** : `/shared/TAxx/performance.csv`
 5. You may click on the **Data Preview** button to inspect the data you are working with
 6. Set **Fail on string truncation**: `True`
 
@@ -162,9 +162,9 @@ Similar to what you already did in **Exercise 2.1** :
 * Add the `Workflow Trigger` and `Structured File Consumer` operators
 * Configure `Structured File Consumer` operator:
 	- Rename the **Label** to `Configuration`
-	- Set storage type to `S3`
-	- Set **S3 Connection** to `TechEd2020_S3`
-	- Choose **S3 Source file** to be `/input/configuration.csv`
+	- Set storage type to `sdl`
+	- Set **S3 Connection** to `DI_DATA_LAKE`
+	- Choose **S3 Source file** to be `/shared/TAxx/configuration.csv`
 * Connect the output of the `Structured File Consumer` operator to the existing `Data Tranform` operator. This will automatically create a new input port.
 
 ![](./images/configuration.png)
