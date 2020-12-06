@@ -68,7 +68,11 @@ If you like to try it first by your own then here is the short summary of the ta
 	- Add the following rule :
 	|Column|Condition|Value|Fail Action|
 	|------|---------|-----|-----------|
-	|KEY1  |>        |0    |FAIL       |
+	|KEY1  |<        |130    |FAIL     |
+	|KEY1  |>        |70     |FAIL     |
+
+	
+	This might look a bit counter-intuitive but it actually means all values > 130 and < 70 fail.
 
 	![configvrrules](./images/Configvrrules.png)
 3. All other configuration parameter leave as default.
@@ -93,8 +97,8 @@ def on_input(data):
 
     # Read data to DataFrame
     data_stream = io.StringIO(data)
-    df = pd.read_csv(data_stream)
-    df.rename(columns={'ERROR ACTION':'ERROR_ACTION', 'ERROR COLUMNS' :'ERROR_COLUMNS', 'ROW ID':'ROW_ID'},inplace=True)
+    df = pd.read_csv(data_stream, names = ["DATE","CELLID","KEY1","KEY2","NOM_KEY1","NOM_KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID"] )
+    #df.rename(columns={'ERROR ACTION':'ERROR_ACTION', 'ERROR COLUMNS' :'ERROR_COLUMNS', 'ROW ID':'ROW_ID'},inplace=True)
 
     # Add ticket information
     df["TIMESTAMP"] = datetime.now()
