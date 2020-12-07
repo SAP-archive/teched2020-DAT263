@@ -4,9 +4,9 @@
 
 You will assigned a number at the beginning of the workshop
 
-  Tenant: `dat263`<br>
-  Username: `taXX` where XX is your assigned number<br>
-  Password: The password that you were provided when assigned an ID<br>
+  Tenant: `default`<br>
+  Username: `TAxx` where xx is your assigned number<br>
+  Password: `Welcome01`<br>
 
   Logon URL: `https://<hyperlink_goes_here>`
 

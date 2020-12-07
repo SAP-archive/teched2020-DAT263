@@ -50,12 +50,12 @@ After completing these steps you will have created a first projection, aggregati
 Right click the `Structured File Consumer` operator and open the configuration menu to parameterize it.
 
 1. (Optional) Rename the **Label** to `Performance`. This makes the pipeline more readable
-2. Set **Storage type** (drop-down menu): `S3`
+2. Set **Storage type** (drop-down menu): `sdl`
 3. In S3 Connection, click on pencil-icon and set
 	* **Configuration Type**: `Configuration Manager`
-	* **Connection ID**:  `TechEd2020_S3`
+	* **Connection ID**:  `DI_DATA_LAKE`
 	* Save
-4. Select the S3 source file by clicking on **monitor-icon** : `/input/performance.csv`
+4. Select the S3 source file by clicking on **monitor-icon** : `/shared/TAxx/performance.csv`
 5. You may click on the **Data Preview** button to inspect the data you are working with
 6. Set **Fail on string truncation**: `True`
 
@@ -96,7 +96,7 @@ This operator is doing the core part of the whole pipeline.
 	|C1    |DATE  | date   |
   |C2    |CELLID| int32  |
 	|C3    |KEY1  | float32|
-	|C4    |KEY2  | float32|
+	|C4    |KEY2 | float32|
 
 6. Return to the modeling view by clicking on the **<** icon in the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
 7. We can now perform an aggregation, similar to that of a SQL Group By, such that that we will get one distinct record for each day and device (="CELLID"). Add an `Aggregation` operator and connect it to the `Projection` operator.
@@ -162,9 +162,9 @@ Similar to what you already did in **Exercise 2.1** :
 * Add the `Workflow Trigger` and `Structured File Consumer` operators
 * Configure `Structured File Consumer` operator:
 	- Rename the **Label** to `Configuration`
-	- Set storage type to `S3`
-	- Set **S3 Connection** to `TechEd2020_S3`
-	- Choose **S3 Source file** to be `/input/configuration.csv`
+	- Set storage type to `sdl`
+	- Set **S3 Connection** to `DI_DATA_LAKE`
+	- Choose **S3 Source file** to be `/shared/TAxx/configuration.csv`
 * Connect the output of the `Structured File Consumer` operator to the existing `Data Tranform` operator. This will automatically create a new input port.
 
 ![](./images/configuration.png)
@@ -213,4 +213,4 @@ Again you should see only one record if you chose to apply the the filter but th
 
 You've now actually created a rather complex data transformation from two different data sources, with joins, aggregation and filtering and storing it to a different type of storage.
 
-Continue to - [Exercise 3](../ex3/README.md)
+Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
