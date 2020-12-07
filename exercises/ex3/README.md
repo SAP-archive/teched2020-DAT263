@@ -26,6 +26,8 @@ If you like to try it first by your own then here is the short summary of the ta
 	`("TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID")`
 4. Save the "service ticket" string to the HANA table `QMTICKET`
 
+Hint: Depending on the HANA DB operator you might have the header passed as well. This you have to consider both with the "Validation"-Rule operator and with the script of the "Python3 Operator". For the latter we added a commented row that would rename the columns if the data provided with a header for complying with the following process steps. 
+
 ## Exercise 3.1
 
 1. Add the following operators to the pipeline canvas and connect them in this order:
@@ -70,7 +72,11 @@ If you like to try it first by your own then here is the short summary of the ta
 
 	|Column|Condition|Value|Fail Action|
 	|------|---------|-----|-----------|
-	|KEY1  |>        |0    |FAIL       |
+	|KEY1  |<        |130    |FAIL     |
+	|KEY1  |>        |70     |FAIL     |
+
+	
+	This might look a bit counter-intuitive but it actually means all values > 130 and < 70 fail.
 
 	![configvrrules](./images/Configvrrules.png)
 3. All other configuration parameter leave as default.
@@ -95,17 +101,17 @@ def on_input(data):
 
     # Read data to DataFrame
     data_stream = io.StringIO(data)
-    df = pd.read_csv(data_stream)
-    df.rename(columns={'ERROR ACTION':'ERROR_ACTION', 'ERROR COLUMNS' :'ERROR_COLUMNS', 'ROW ID':'ROW_ID'},inplace=True)
+    df = pd.read_csv(data_stream, names = ["DATE","CELLID","KEY1","KEY2","NOM_KEY1","NOM_KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID"] )
+    #df.rename(columns={'ERROR ACTION':'ERROR_ACTION', 'ERROR COLUMNS' :'ERROR_COLUMNS', 'ROW ID':'ROW_ID'},inplace=True)
 
     # Add ticket information
     df["TIMESTAMP"] = datetime.now()
     df["STATUS"] = 'open'
-    df["COMMENT"] = ''
+    df["COMMENT"] = 'TAxx'
     df["ROW_ID"] = df["ROW_ID"].astype('int64')
 
     # resort DataFrame in case of order is important
-    df = df[["TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID"]]
+    df = df[["TIMESTAMP","STATUS","COMMENT","DATE","CELLID","KEY1","KEY2","NOM_KEY1","NOM_KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID"]]
 
     api.send("ticket", api.Message(attributes={'data':'FAILED'},body=df.to_csv(index = False,date_format="%Y-%m-%d %H:%M:%S",header=False)))
 
@@ -114,7 +120,8 @@ api.set_port_callback("failed", on_input)
 
 ```
 
-The basic idea of this script is to store the csv records ,which are coming from the `fail` outport of the `Validation Rule` operator, as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, convert it back into a csv-format and send it to the outport `ticket`
+The basic idea of this script is to store the csv records ,which are coming from the `fail` outport of the `Validation Rule` operator, as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, convert it back into a csv-format and send it to the outport `ticket`. 
+You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your QM tickets. 
 5. Add a new `Wiretap` operator to the canvas and connect it to the "Python3 Operator" outport.
 6. Save and run the pipeline and check if the output is what you expected.
 
@@ -123,7 +130,7 @@ The basic idea of this script is to store the csv records ,which are coming from
 1. Add the `SAP HANA Client` operator to the canvas and connect it either to the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
 2. Configure the **SAP HANA Client**
 	1. **Connection:** `Configuration Manager/HANA_CLOUD_TECHED`
-	2. **Table name:** `"TECHED"."TAxx.QMTICKET"` where xx is your assigned user ID. Don't forget to include the double quotes!
+	2. **Table name:** `"TECHED"."QMTICKET"`. Don't forget to include the double quotes!
 	3. All other parameters can be left as their default values
 3. Finally, add **Graph Terminator** operator and connect it to the `HANA client` operator
 4. Save and run the pipeline. It should eventually switch to status `Completed`.
