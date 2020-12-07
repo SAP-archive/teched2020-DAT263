@@ -28,13 +28,13 @@ After having done all the tasks you are familiar with the general concept of **S
 
 ## Requirements
 
-  * Login credentials to SAP Data Intelligence (Handed out at the beginning of the session)
+  * Login credentials to SAP Data Intelligence ([Registration page: register.cfapps.eu10.hana.ondemand.com](register.cfapps.eu10.hana.ondemand.com)). Please select one of the workshops: 
+  	* DAT263\_1 (2am UTZ) or 
+  	* DAT263\_2 (2pm UTZ)
   * Chrome browser (Recommended)
 
 
 ## Exercises
-
-Provide the exercise content here directly in README.md using [markdown](https://guides.github.com/features/mastering-markdown/) and linking to the specific exercise pages, below is an example.
 
 - [Getting Started](exercises/gettingstarted/)
 - [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
@@ -43,11 +43,9 @@ Provide the exercise content here directly in README.md using [markdown](https:/
     - [Part 3: Executing the pipeline](exercises/ex1#Part-3-Executing-the-pipeline)
 - [Exercise 2: Joining and writing workflow data to SAP HANA](exercises/ex2/)
 - [Exercise 3 - Running a simple data validation](exercises/ex3/)
+- [Exercise 4 - Analyse data with Jupyter Notebook](exercises/ex4/)
+- [Exercise 5 - Create a RestAPI receiving data from devices (simulation)](exercises/ex5/)
 
-
-**IMPORTANT**
-
-Your repo must contain the .reuse and LICENSES folder and the License section below. DO NOT REMOVE the section or folders/files. Also, remove all unused template assets(images, folders, etc) from the exercises folder.
 
 ## How to obtain support
 
