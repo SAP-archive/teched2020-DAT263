@@ -5,7 +5,7 @@ import random
 from datetime import datetime
 
 # DI pipeline path: DI-URL/<path>/<operation>
-url = 'https://vsystem.ingress.dh-ia37o5zq.dhaas-live.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/teched2020/performance/data'
+url = 'https://vsystem.ingress.dh-6srbrjhsl.dh-canary.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/teched2020/teadm_performance/data'
 
 # commandline parser
 parser = argparse.ArgumentParser(description='Sending device data to SAP Data Intelligence.')
@@ -20,7 +20,7 @@ key2 = random.gauss(200,20)
 data = {'TIMESTAMP': datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'CELLID': args.cellid, 'KEY1':key1, 'KEY2':key2}
 
 # send request
-auth = ('default\\' + args.user,args.pwd)
+auth = ('dat263\\' + args.user,args.pwd)
 headers = {'X-Requested-With': 'XMLHttpRequest'}
 resp = requests.post(url, json = data,auth=auth,headers=headers)
 

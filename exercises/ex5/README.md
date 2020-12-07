@@ -23,15 +23,17 @@ Creating the basic RestAPI:
 1. Create new Graph
 2. Add the RestAPI operator **OpenAPI Servlow** and the **Wiretap** opertorator
 3. Configure the **OpenAPI Servlow** operator
-	1.  Base Path: 'teched2020/\<di_user\>\_performance - This defines which service the Web-server calls. 
+	1.  Base Path: 'teched2020/\<di_user\>\_performance - This defines which service the Web-server calls. (Attention: No leading '/')
 	2. One-Way: True (operator is not waiting for a response but sends immediatedly HTTP 204 back. 
 4. Add the **Write File** operator and the **To File** converter
 5. Configure the **Write File** operator: 
 	1. Connection: S3 - TechEd2020_S3
 	2. Path mode: "Static (from configuration)
 	3. Path: */output/\<di_user\>/logrestapi.csv* (this format is currently supported by Metadata explorer and the result can be viewed. Otherwise the file had to be downloaded first.)
-6. Add the **Workflow Terminator** to the graph.
+	4. Mode: "Append"
+6. Add the **Workflow Terminator** to the graph. Of course if run productivly there would be no "Terminmatr" but run perpetually.
 7. Connect all operators  
+8. Save the pipeline as "taxx.DeviceRestAPI"
 
 ![restapi](./images/restapi1.png)
 
@@ -69,26 +71,6 @@ In the body you can add the actual data that should be posted. Here we can add a
 3. The received request is saved to the specified file and the pipeline terminates
 4. Check the file. 
 
-### CURL
-If you are not using postman you can send a command from a terminal. CURL is pre-installed on nearly all systems. 
-
-1. Open your terminal application and paste the following command to a text editor (recommended)
-
-``` 
-curl --location --request POST 'https://vsystem.ingress.dh-ia37o5zq.dhaas-live.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/teched2020/performance/test' \
---header 'X-Requested-With: XMLHttpRequest' \
---header 'Authorization: Basic ZGVmYXVsdFx0ZWNoZWQyMDIwOlRlZDIzNDUh' \
---header 'Content-Type: text/plain' \
---data-raw '{"TIMESTAMP":"2020-10-19 20:06:55","CELLID":1234512,"KEY1":111.1,"KEY2":222.2}'
-```
-
-2. Change the url and the path to the service according to your system environment and settings. 
-3. Change the Authorization string after "Authorization: Basic" to the base64 encoded DI credentials provided with your credentials. 
-3. Maybe change the data in --data-raw
-4. Start the RestAPI pipeline
-5. When the pipeline is running, send the curl command
-6. The received request is saved to the specified file and the pipeline terminates
-7. Check the file. 
 
 ### Python client
 
