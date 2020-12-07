@@ -28,9 +28,9 @@ After having done all the tasks you are familiar with the general concept of **S
 
 ## Requirements
 
-  * Login credentials to SAP Data Intelligence ([Registration page: register.cfapps.eu10.hana.ondemand.com](register.cfapps.eu10.hana.ondemand.com)). Please select one of the workshops: 
-  	* DAT263\_1 (2am UTZ) or 
-  	* DAT263\_2 (2pm UTZ)
+  * Login credentials to SAP Data Intelligence ([Registration page: https://register.cfapps.eu10.hana.ondemand.com](https://register.cfapps.eu10.hana.ondemand.com)). Please select one of the workshops: 
+  	* DAT263\_1 (1.30 am UTC) or 
+  	* DAT263\_2 (1.30 pm UTC)
   * Chrome browser (Recommended)
 
 
