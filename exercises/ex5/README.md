@@ -26,12 +26,12 @@ Creating the basic RestAPI:
 	1.  Base Path: 'teched2020/\<di_user\>\_performance - This defines which service the Web-server calls. (Attention: No leading '/')
 	2. One-Way: True (operator is not waiting for a response but sends immediatedly HTTP 204 back. 
 4. Add the **Write File** operator and the **To File** converter
-5. Configure the **Write File** operator: 
-	1. Connection: S3 - TechEd2020_S3
+5. Configure the **Write File** operator for adding the data to your "performance.csv": 
+	1. Connection: DI_DATA_LAKE
 	2. Path mode: "Static (from configuration)
-	3. Path: */output/\<di_user\>/logrestapi.csv* (this format is currently supported by Metadata explorer and the result can be viewed. Otherwise the file had to be downloaded first.)
+	3. Path: */shared/\<di_user\>/performance.csv* 
 	4. Mode: "Append"
-6. Add the **Workflow Terminator** to the graph. Of course if run productivly there would be no "Terminmatr" but run perpetually.
+6. Add the **Workflow Terminator** to the graph. Of course if run productivly there would be no "Terminator" but run perpetually.
 7. Connect all operators  
 8. Save the pipeline as "taxx.DeviceRestAPI"
 
@@ -93,61 +93,6 @@ The easiest way to test the RestAPI is using the page we created to test the res
 
 ![Response Page](./images/ResponseTestRestAPI.png)
 
-
-
- 
-## Exercise 5.2
-
-Adding a "Python3 Operator" that processes the received data and sends it to "Write File" operator for appending the data to the existing 'input/\<di_user\>/performance.csv'. A response is also created but not used for this use case. 
-
-1. Add a "Python3 Operator" and add 
-	1. inport: 'input'/message
-	2. outport: 'output'/message
-	3. outport: 'response'/message
-
-2. Put the new "Python3 Operator" into the pipeline between the "OpenAPI Servlow" (or Wiretap) and the "To File" converter. An connect the outport "output" with the latter. 
-
-3. Change the configuration of the "Write File" operator to */input/\<di_user\>/performance.csv*
-
-3. Open script of "Python3 Operator" and copy the following script: 
-
-```
-import json
-import sys
-
-def on_input(msg):
-    
-    #prepare for a response message
-    attributes = {}
-    for key in msg.attributes :
-        # only copy the headers that won't interfer with the recieving operators
-        if not "openapi.header" in key  or  key == "openapi.header.x-request-key" : 
-             attributes[key] = msg.attributes[key]
-    
-    # Send data to output and response
-    # In case of a body with wrong format exceptions are caught to avoid a pipeline crash
-    try : 
-        devdata = json.loads(msg.body)
-        str_line = devdata['TIMESTAMP'] + ',' +  str(devdata['CELLID']) + ','+ str(devdata['KEY1'])  + ','  + str(devdata['KEY2']) + '\n'
-        api.send("output", str_line)
-        api.send("response",api.Message(attributes=attributes,body=msg.body))
-    except ValueError as e: 
-        error_str = "Value Error: {}\n{}".format(e,msg.body)
-        api.send("log",error_str)
-        api.send("response",api.Message(attributes=attributes,body=error_str))
-    except json.decoder.JSONDecodeError as e: 
-        error_str = "JSONDecodeError: {}\n{}".format(e,msg.body)
-        api.send("log",error_str)
-        api.send("response",api.Message(attributes=attributes,body=error_str))
-
-
-api.set_port_callback("input", on_input)
-
-```
-
-![restapi2](./images/restapi2.png)
-
-Now you can save, run and test the RestAPI pipeline as done in the previous section.
 
 
 ## Summary
