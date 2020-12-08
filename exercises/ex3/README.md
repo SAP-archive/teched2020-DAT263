@@ -56,6 +56,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 2. Configure the **Input Schema**: Click on *Edit*
 	- In the new configuration window "Edit property 'Input Schema'
 	- Add for each table column an item:
+
 	|Name    |Type              |
 	|--------|------------------|
 	|DATE    |String (Length 10)|
@@ -68,6 +69,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 	![configvrschema](./images/Configvrschema.png)
 3. Return to the operator's configuration menu and edit **Rules**:
 	- Add the following rule :
+	
 	|Column|Condition|Value  |Fail Action|
 	|------|---------|-------|-----------|
 	|KEY1  |<        |130    |FAIL       |
