@@ -89,14 +89,14 @@ This operator is doing the core part of the whole pipeline.
 	![](./images/projection.png)
 
 5. Click on the **automapping** button and change the name and the data types at the target according to below table.
-![Structured Data Operators](./images/TransformConfig.png)
+	![Structured Data Operators](./images/TransformConfig.png)
 
 	|Source|Target|DataType|
 	|------|------|--------|
-	|C1    |DATE  | date   |
-  |C2    |CELLID| int32  |
-	|C3    |KEY1  | float32|
-	|C4    |KEY2  | float32|
+	|C1    |DATE  |date    |
+  |C2    |CELLID|int32   |
+	|C3    |KEY1  |float32 |
+	|C4    |KEY2  |float32 |
 
 6. Return to the modeling view by clicking on the **<** icon in the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
 7. We can now perform an aggregation, similar to that of a SQL Group By, such that that we will get one distinct record for each day and device (="CELLID"). Add an `Aggregation` operator and connect it to the `Projection` operator.
@@ -178,6 +178,7 @@ Double click the `Data Transform` operator to open it. You will then see a secon
 2. Configure the new `Projector` operator
 	1. **Automap** the source columns to target columns
 	2. Change the names and the data types of the target columns as follows:
+
 		|Source|Target|DataType|
 		|--|--------|-------|
 		|C1|DATE    |date   |
