@@ -28,8 +28,8 @@ After having done all the tasks you are familiar with the general concept of **S
 
 ## Requirements
 
-  * Login credentials to SAP Data Intelligence ([Registration page: https://register.cfapps.eu10.hana.ondemand.com](https://register.cfapps.eu10.hana.ondemand.com)). Please select one of the workshops: 
-  	* DAT263\_1 (1.30 am UTC) or 
+  * Login credentials to SAP Data Intelligence ([Registration page: https://register.cfapps.eu10.hana.ondemand.com](https://register.cfapps.eu10.hana.ondemand.com)). Please select one of the workshops:
+  	* DAT263\_1 (1.30 am UTC) or
   	* DAT263\_2 (1.30 pm UTC)
   * Chrome browser (Recommended)
 
@@ -38,10 +38,7 @@ After having done all the tasks you are familiar with the general concept of **S
 
 - [Getting Started](exercises/gettingstarted/)
 - [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
-    - [Part 1: Preview the source data in Metadata Explorer](exercises/ex1#Part-1-Preview-the-source-data-in-Metadata-Explorer)
-    - [Part 2: Building the pipeline](exercises/ex1#Part-2-Building-the-pipeline)
-    - [Part 3: Executing the pipeline](exercises/ex1#Part-3-Executing-the-pipeline)
-- [Exercise 2: Joining and writing workflow data to SAP HANA](exercises/ex2/)
+- [Exercise 2 - Joining and writing workflow data to SAP HANA](exercises/ex2/)
 - [Exercise 3 - Running a simple data validation](exercises/ex3/)
 - [Exercise 4 - Analyse data with Jupyter Notebook](exercises/ex4/)
 - [Exercise 5 - Create a RestAPI receiving data from devices (simulation)](exercises/ex5/)

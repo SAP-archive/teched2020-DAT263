@@ -26,7 +26,7 @@ If you like to try it first by your own then here is the short summary of the ta
 		("TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID")
 4. Save the "service ticket" string to the HANA table `QMTICKET`
 
-Hint: Depending on the HANA DB operator you might have the header passed as well. This you have to consider both with the "Validation"-Rule operator and with the script of the "Python3 Operator". For the latter we added a commented row that would rename the columns if the data provided with a header for complying with the following process steps. 
+Hint: Depending on the HANA DB operator you might have the header passed as well. This you have to consider both with the "Validation"-Rule operator and with the script of the "Python3 Operator". For the latter we added a commented row that would rename the columns if the data provided with a header for complying with the following process steps.
 
 ## Exercise 3.1
 
@@ -56,24 +56,24 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 2. Configure the **Input Schema**: Click on *Edit*
 	- In the new configuration window "Edit property 'Input Schema'
 	- Add for each table column an item:
-	|Name|Type|
-	|----|----|
-	|DATE|String (Length 10)|
-	|CELLID|Integer|
-	|NOM_KEY1|Number|
-	|NOM_KEY2|Number|
-	|KEY1|Number|
-	|KEY2|Number|
+	|Name    |Type              |
+	|--------|------------------|
+	|DATE    |String (Length 10)|
+	|CELLID  |Integer           |
+	|NOM_KEY1|Number            |
+	|NOM_KEY2|Number            |
+	|KEY1    |Number            |
+	|KEY2    |Number            |
 
 	![configvrschema](./images/Configvrschema.png)
 3. Return to the operator's configuration menu and edit **Rules**:
 	- Add the following rule :
-	|Column|Condition|Value|Fail Action|
-	|------|---------|-----|-----------|
-	|KEY1  |<        |130    |FAIL     |
-	|KEY1  |>        |70     |FAIL     |
+	|Column|Condition|Value  |Fail Action|
+	|------|---------|-------|-----------|
+	|KEY1  |<        |130    |FAIL       |
+	|KEY1  |>        |70     |FAIL       |
 
-	
+
 	This might look a bit counter-intuitive but it actually means all values > 130 and < 70 fail.
 
 	![configvrrules](./images/Configvrrules.png)
@@ -118,8 +118,8 @@ api.set_port_callback("failed", on_input)
 
 ```
 
-The basic idea of this script is to store the csv records ,which are coming from the `fail` outport of the `Validation Rule` operator, as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, convert it back into a csv-format and send it to the outport `ticket`. 
-You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your QM tickets. 
+The basic idea of this script is to store the csv records ,which are coming from the `fail` outport of the `Validation Rule` operator, as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, convert it back into a csv-format and send it to the outport `ticket`.
+You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your QM tickets.
 5. Add a new `Wiretap` operator to the canvas and connect it to the "Python3 Operator" outport.
 6. Save and run the pipeline and check if the output is what you expected.
 
@@ -139,4 +139,4 @@ You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your
 
 You have learnt an alternative way to read and write to a HANA database as with the `Structured Data` operators of the previous exercise. We used the "Validation Rule" operator to do simple data quality checks and finally how to use a python custom operator to leverage all the options provided by an advanced script.
 
-Continue to - [Exercise 4](../ex4/README.md)
+Continue to [Exercise 4: Analyse the Data with Jupyter Notebook](../ex4/README.md)

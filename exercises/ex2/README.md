@@ -96,7 +96,7 @@ This operator is doing the core part of the whole pipeline.
 	|C1    |DATE  | date   |
   |C2    |CELLID| int32  |
 	|C3    |KEY1  | float32|
-	|C4    |KEY2 | float32|
+	|C4    |KEY2  | float32|
 
 6. Return to the modeling view by clicking on the **<** icon in the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
 7. We can now perform an aggregation, similar to that of a SQL Group By, such that that we will get one distinct record for each day and device (="CELLID"). Add an `Aggregation` operator and connect it to the `Projection` operator.
@@ -126,7 +126,8 @@ This operator is doing the core part of the whole pipeline.
 
 			"CELLID" = 1234512 AND "DATE" = '2020-11-01'
 	 ![Structured Data Operators](./images/datafilter.png)
-12. Return to to `Data Transform` modeling perspective and right-click on the outport of the last `Projection` operator and select `Create Data target`.  ![Structured Data Operators](./images/createdatatarget.png).
+12. Return to the `Data Transform` modeling perspective and right-click on the outport of the last `Projection` operator and select `Create Data target`.
+ ![Structured Data Operators](./images/createdatatarget.png).
 12. By clicking on the **auto-layout** you can rearrange your pipeline
 13. Open the **Configuration** menu of the `output` operator. Under the **General** section you can verify the outgoing columns of the `Transform` operator. ![Structured Data Operators](./images/transformoutput1.png).
 
@@ -178,11 +179,11 @@ Double click the `Data Transform` operator to open it. You will then see a secon
 	1. **Automap** the source columns to target columns
 	2. Change the names and the data types of the target columns as follows:
 		|Source|Target|DataType|
-		|------|------|--------|
-		|C1    |DATE  |date    |
-		|C2    |CELLID|int32   |
-		|C3    |NOM_KEY1|float32|
-		|C4    |NOM_KEY2|float32|
+		|--|--------|-------|
+		|C1|DATE    |date   |
+		|C2|CELLID  |int32  |
+		|C3|NOM_KEY1|float32|
+		|C4|NOM_KEY2|float32|
 
 3. Add a `Join` operator and connect the new `Projection2` operator to the top `inport` of the `Join` operator
 4. Remove the connection from the `Aggregation` output operator to the `Projection1` operator by clicking on the connection to mark it and then right-click to remove it. ![remove connections](./images/removeconnection.png)
@@ -213,4 +214,4 @@ Again you should see only one record if you chose to apply the the filter but th
 
 You've now actually created a rather complex data transformation from two different data sources, with joins, aggregation and filtering and storing it to a different type of storage.
 
-Continue to - [Exercise 3 - Exercise 3 Description](../ex3/README.md)
+Continue to [Exercise 3: Validating Data Quality](../ex3/README.md)

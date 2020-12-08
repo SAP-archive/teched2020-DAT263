@@ -2,13 +2,16 @@
 
 ## Logging on to SAP Data Intelligence
 
-You will assigned a number at the beginning of the workshop
+Obtain a unique user ID at the SAP Data Intelligence workshop registration page: https://register.cfapps.eu10.hana.ondemand.com​
+* Please do not create more than one user!
+* If you forget your credentials let us know
 
-  Tenant: `default`<br>
+
+  Tenant: `dat263`<br>
   Username: `TAxx` where xx is your assigned number<br>
-  Password: `Welcome01`<br>
+  Password: `<your_assigned_password>`<br>
 
-  Logon URL: `https://<hyperlink_goes_here>`
+  Logon URL: [https://vsystem.ingress.dh-6srbrjhsl.dh-canary.shoot.live.k8s-hana.ondemand.com/login/?tenant=dat263](https://vsystem.ingress.dh-6srbrjhsl.dh-canary.shoot.live.k8s-hana.ondemand.com/login/?tenant=dat263)
 
   ![](./images/login.png)
 
