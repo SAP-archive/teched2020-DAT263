@@ -51,11 +51,11 @@ Right click the `Structured File Consumer` operator and open the configuration m
 
 1. (Optional) Rename the **Label** to `Performance`. This makes the pipeline more readable
 2. Set **Storage type** (drop-down menu): `sdl`
-3. In S3 Connection, click on pencil-icon and set
+3. In sdl Connection, click on pencil-icon and set
 	* **Configuration Type**: `Configuration Manager`
 	* **Connection ID**:  `DI_DATA_LAKE`
 	* Save
-4. Select the S3 source file by clicking on **monitor-icon** : `/shared/TAxx/performance.csv`
+4. Select the source file by clicking on **monitor-icon** : `/shared/TAxx/performance.csv`
 5. You may click on the **Data Preview** button to inspect the data you are working with
 6. Set **Fail on string truncation**: `True`
 
