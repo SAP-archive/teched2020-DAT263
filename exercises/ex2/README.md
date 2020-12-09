@@ -182,10 +182,10 @@ Double click the `Data Transform` operator to open it. You will then see a secon
 
 		|Source|Target|DataType|
 		|--|--------|-------|
-		|C1|DATE    |date   |
-		|C2|CELLID  |int32  |
-		|C3|NOM_KEY1|float32|
-		|C4|NOM_KEY2|float32|
+		|C0|DATE    |date   |
+		|C1|CELLID  |int32  |
+		|C2|NOM_KEY1|float32|
+		|C3|NOM_KEY2|float32|
 
 3. Add a `Join` operator and connect the new `Projection2` operator to the top `inport` of the `Join` operator
 4. Remove the connection from the `Aggregation` output operator to the `Projection1` operator by clicking on the connection to mark it and then right-click to remove it. ![remove connections](./images/removeconnection.png)
