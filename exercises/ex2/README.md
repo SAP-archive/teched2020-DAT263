@@ -93,10 +93,11 @@ This operator is doing the core part of the whole pipeline.
 
 	|Source|Target |DataType|
 	|------|-------|--------|
-	|C1    |DATE   |date    |
-	|C3    |KEY1   |float32 |
-	|C4    |KEY2   |float32 |
-	|C2    |CELLID |int32   |
+	|C0    |DATE   |date    |
+	|C1    |CELLID |int32   |
+	|C2    |KEY1   |float32 |
+	|C2    |KEY2   |float32 |
+
 
 6. Return to the modeling view by clicking on the **<** icon in the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
 7. We can now perform an aggregation, similar to that of a SQL Group By, such that that we will get one distinct record for each day and device (="CELLID"). Add an `Aggregation` operator and connect it to the `Projection` operator.
