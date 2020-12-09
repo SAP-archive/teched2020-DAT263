@@ -96,7 +96,7 @@ This operator is doing the core part of the whole pipeline.
 	|C0    |DATE   |date    |
 	|C1    |CELLID |int32   |
 	|C2    |KEY1   |float32 |
-	|C2    |KEY2   |float32 |
+	|C3    |KEY2   |float32 |
 
 
 6. Return to the modeling view by clicking on the **<** icon in the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
