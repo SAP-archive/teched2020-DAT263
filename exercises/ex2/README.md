@@ -51,11 +51,11 @@ Right click the `Structured File Consumer` operator and open the configuration m
 
 1. (Optional) Rename the **Label** to `Performance`. This makes the pipeline more readable
 2. Set **Storage type** (drop-down menu): `sdl`
-3. In S3 Connection, click on pencil-icon and set
+3. In sdl Connection, click on pencil-icon and set
 	* **Configuration Type**: `Configuration Manager`
 	* **Connection ID**:  `DI_DATA_LAKE`
 	* Save
-4. Select the S3 source file by clicking on **monitor-icon** : `/shared/TAxx/performance.csv`
+4. Select the source file by clicking on **monitor-icon** : `/shared/TAxx/performance.csv`
 5. You may click on the **Data Preview** button to inspect the data you are working with
 6. Set **Fail on string truncation**: `True`
 
@@ -93,10 +93,11 @@ This operator is doing the core part of the whole pipeline.
 
 	|Source|Target |DataType|
 	|------|-------|--------|
-	|C1    |DATE   |date    |
-	|C3    |KEY1   |float32 |
-	|C4    |KEY2   |float32 |
-	|C2    |CELLID |int32   |
+	|C0    |DATE   |date    |
+	|C1    |CELLID |int32   |
+	|C2    |KEY1   |float32 |
+	|C3    |KEY2   |float32 |
+
 
 6. Return to the modeling view by clicking on the **<** icon in the top-left corner  of the pipeline canvas. ![Structured Data Operators](./images/BackClickDataTransform.png)
 7. We can now perform an aggregation, similar to that of a SQL Group By, such that that we will get one distinct record for each day and device (="CELLID"). Add an `Aggregation` operator and connect it to the `Projection` operator.
@@ -181,10 +182,10 @@ Double click the `Data Transform` operator to open it. You will then see a secon
 
 		|Source|Target|DataType|
 		|--|--------|-------|
-		|C1|DATE    |date   |
-		|C2|CELLID  |int32  |
-		|C3|NOM_KEY1|float32|
-		|C4|NOM_KEY2|float32|
+		|C0|DATE    |date   |
+		|C1|CELLID  |int32  |
+		|C2|NOM_KEY1|float32|
+		|C3|NOM_KEY2|float32|
 
 3. Add a `Join` operator and connect the new `Projection2` operator to the top `inport` of the `Join` operator
 4. Remove the connection from the `Aggregation` output operator to the `Projection1` operator by clicking on the connection to mark it and then right-click to remove it. ![remove connections](./images/removeconnection.png)
