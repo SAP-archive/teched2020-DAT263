@@ -1,5 +1,7 @@
 # DAT263 - Create and Manage End-to-End Data Pipelines with SAP Data Intelligence
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/teched2020-DAT263)](https://api.reuse.software/info/github.com/SAP-samples/teched2020-DAT263)
+
 ## Description
 
 This repository contains the material for the SAP TechEd 2020 session called Session ID - DAT263.
