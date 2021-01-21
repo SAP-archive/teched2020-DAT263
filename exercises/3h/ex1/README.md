@@ -78,37 +78,41 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 - *\[Optional\]* You can rename the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
   ![](./images/configure_writeFile.png)
 
-13. When the `Write File` operator has successfully written the last batch of data it will mark its last output with an attribute `lastBatch`. We can use this as a trigger to safely terminate the pipeline.
-  - Use the search field to find the `Message Filter` operator, drag and drop it into your graph.
-  - Connect the `file` output node to its input node
-  - Because the output node is of different datatype than the input node you will be prompted select to conversion method: Choose `From File (com.sap.from.File)`
+13. When the `Write File` operator has successfully written the last batch of data it will mark its last message output with an attribute `lastBatch`. We can listen for this attribute and create a trigger to safely terminate the pipeline.
+  - Use the search field to find the `Python3` operator, drag and drop it into your graph.
+  - Right click it and select open configuration: Set the label to read `Message Filter`
+  - Right click the operator again and select `Add Port`. Do this twice to add the following two ports:
 
-  ![](./images/operator_messageFilter.png)
+  |Name    |Type        |Data Type|Data Type Name|
+  |--------|------------|---------|--------------|
+  |input   |input port  |Basic    |message.file  |
+  |output  |output port |Basic    |any.*         |
 
-  ![](./images/conversion_fromFile.png)
+![](./images/configure_python3.png)
 
-14. Right click the `Message Filter` operator, select the **Open Configuration** button, and then click the **pencil button** define which condition to filter for.
+  - Connect the `file` output node to the python operator's input node, and the
+  - Right click the python3 operator and select `Open Script`. This will open a code editor as a new tab inside the Modeler.
+  - Delete any pre-existing code and copy/paste below text snippet. Afterwards you may close the code editor tab.
+      ```
+    def on_input(data):
 
-  ![](./images/configure_messageFilter.png)
+    # If the attribute lastBatch is set then send an output, else do nothing
+      if data.attributes.get("message.lastBatch",False):
+        api.send("output", True)
 
-15. Copy/paste the following json code snippet into the text editor and click **Save**
-  ```
-  {
-  	"message.lastBatch": true
-  }
-  ```
-  ![](./images/editProperty_messageFilter.png)
+    # When an input is received, call the function on_input()
+    api.set_port_callback("input", on_input)
+      ```    
 
 
-16. Use the search field to find the `Graph Terminator` operator. Drag and drop it into your graph. This operator will terminate the pipeline execution when receiving any input to its input node. Connect the output node of the `Message Filter` to the input node of the `Graph Terminator`.
+14. Use the search field to find the `Graph Terminator` operator. Drag and drop it into your graph. This operator will terminate the pipeline execution when receiving any input to its input node. Connect the output node your `python3` operator to the input node of the `Graph Terminator`.
 
   ![](./images/operator_graphTerminator.png)
 
-  Since the `Message Operator` is filtering out all messages that do not contain the `lastBatch` attribute the graph will not be terminated until we are sure that the last batch was written by the  for the `Write File` operator.
+  Since the custom `Message Filter` operator is filtering out all messages that do not contain the `lastBatch` attribute the graph will not be terminated until we are sure that the last batch of data was written by `Write File` operator.
 
-17. Save the graph by clicking on the **floppy disk** icon located in the toolbar at the top of the screen.
+15. Save the graph by clicking on the **floppy disk** icon located in the toolbar at the top of the screen.
 
-  ![](./images/saveGraphAgain.png)
 
 ## Part 3: Executing the pipeline
 
@@ -138,12 +142,12 @@ Now that you've completed designing your graph it is time to execute it and insp
 6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv file (The file size should be approx 83kb)
 
   ![](./images/performance_dataPreview.png)
-  
-## Part 4: Copy Pipeline 
+
+## Part 4: Copy Pipeline
 We need the same data pipeline for consolidating the configuration files into on `configuration.csv`-file.
 
-1. 'Save as..' the previous pipeline and name it to `FileCollectionConfiguration_TAxx`. Click on the **floppy disk** icon located in the toolbar at the top of the screen. 
-2. Change the configuration-parameters: 
+1. 'Save as..' the previous pipeline and name it to `FileCollectionConfiguration_TAxx`. Click on the **floppy disk** icon located in the toolbar at the top of the screen.
+2. Change the configuration-parameters:
 	1. "List-Files" operator, Path: "/device_configuration"
 	2. "Write File" operator, Path: "/shared/TAxx/configuration.csv"
 3. Run pipeline to create the configuration.csv-File
