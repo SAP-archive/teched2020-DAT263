@@ -28,7 +28,7 @@ If you like to try it first by your own then here is the short summary of the ta
 
 Hint: Depending on the HANA DB operator you might have the header passed as well. This you have to consider both with the "Validation"-Rule operator and with the script of the "Python3 Operator". For the latter we added a commented row that would rename the columns if the data provided with a header for complying with the following process steps.
 
-## Exercise 3.1
+## Exercise 2.1
 
 1. Add the following operators to the pipeline canvas and connect them in this order:
 	- `Workflow Trigger`
@@ -51,7 +51,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 4. Before we continue with the designing the pipeline we want to verify that data is being read correctly from HANA and rewritten into a CSV format. Start the pipeline and wait for it to in status `Running`. Click on the **Open UI** icon on the `Wiretap` operator. (This icon only appears when the pipeline is running) A new browser tab is opened and if everything is configured correctly CSV data should be displayed.
 
 
-## Excercise 3.2
+## Excercise 2.2
 In this part we like to analyse the data with a python script.
 
 1. Add the `Python3` operator to the canvas and connect it to either to the outport of the **Wiretap** or the outport of the **Flowagent CSV Producer** (outContent)
@@ -99,7 +99,7 @@ You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your
 5. Add a new `Wiretap` operator to the canvas and connect it to the "Python3 Operator" outport.
 6. Save and run the pipeline and check if the output is what you expected.
 
-## Exercise 3.4
+## Exercise 2.4
 
 1. Add the `SAP HANA Client` operator to the canvas and connect the `data`-inport either to the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
 2. Configure the **SAP HANA Client**
@@ -115,4 +115,4 @@ You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your
 
 You have learnt an alternative way to read and write to a HANA database as with the `Structured Data` operators of the previous exercise. We used the "Validation Rule" operator to do simple data quality checks and finally how to use a python custom operator to leverage all the options provided by an advanced script.
 
-Continue to [Exercise 4: Analyse the Data with Jupyter Notebook](../ex4/README.md)
+Continue to [Exercise 3: Create RestAPI](../ex3/README.md)

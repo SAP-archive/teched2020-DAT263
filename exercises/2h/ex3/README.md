@@ -1,4 +1,4 @@
-# Exercise 5: Sending Device Data via Rest API
+# Exercise 3 (2h-W): Sending Device Data via Rest API
 
 ## Description
 In this exercise we create a Rest API service that can be called by devices to save the performance data to a file. This could be the very beginning of the whole use case you just accomplished so far.  
@@ -15,7 +15,7 @@ Creating a Pipeline with a web-service that can be called externally and hand ov
 
 In order to test the Rest API service a client application is provided which can generate and send example data to web service. You may alternatively use the Postman application or the terminal command `curl`.
 
-## Exercise 5.1
+## Exercise 3.1
 Each running pipeline consumes a node in the cluster. Due to the limited size of our workshop-cluster we ask you kindly to ensure that the web-service pipeline is only running as short as possible. For testing purpose we write the web-service response to a file and then terminate the graph.
 
 Creating the basic RestAPI:
