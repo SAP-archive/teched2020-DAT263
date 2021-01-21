@@ -3,6 +3,7 @@
 ## Logging on to SAP Data Intelligence
 
 Obtain a unique user ID at the SAP Data Intelligence workshop registration page: https://register.cfapps.eu10.hana.ondemand.com​
+
 * Please do not create more than one user!
 * If you forget your credentials let us know
 

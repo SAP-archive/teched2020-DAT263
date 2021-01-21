@@ -30,20 +30,27 @@ After having done all the tasks you are familiar with the general concept of **S
 
 ## Requirements
 
-  * Login credentials to SAP Data Intelligence ([Registration page: https://register.cfapps.eu10.hana.ondemand.com](https://register.cfapps.eu10.hana.ondemand.com)). Please select one of the workshops:
-  	* DAT263\_1 (1.30 am UTC) or
-  	* DAT263\_2 (1.30 pm UTC)
+  * Login credentials to SAP Data Intelligence ([Registration page: http://workshop_registration.cfapps.eu10.hana.ondemand.com/register/Thorsten](http://workshop_registration.cfapps.eu10.hana.ondemand.com/register/Thorsten)).
   * Chrome browser (Recommended)
 
 
 ## Exercises
 
+### 3h Workshop
+
 - [Getting Started](exercises/gettingstarted/)
 - [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
-- [Exercise 2 - Joining and writing workflow data to SAP HANA](exercises/ex2/)
-- [Exercise 3 - Running a simple data validation](exercises/ex3/)
-- [Exercise 4 - Analyse data with Jupyter Notebook](exercises/ex4/)
-- [Exercise 5 - Create a RestAPI receiving data from devices (simulation)](exercises/ex5/)
+- [Exercise 2 - Joining and writing workflow data to SAP HANA](exercises/3h/ex2/)
+- [Exercise 3 - Running a simple data validation](exercises/3h/ex3/)
+- [Exercise 4 - Analyse data with Jupyter Notebook](exercises/3h/ex4/)
+- [Exercise 5 - Create a RestAPI receiving data from devices (simulation)](exercises/3h/ex5/)
+
+### 2h Workshop
+
+- [Getting Started](exercises/gettingstarted/)
+- [Exercise 1 - Joining and writing workflow data to SAP HANA](exercises/2h/ex2/)
+- [Exercise 2 - Running a simple data validation](exercises/2h/ex3/)
+- [Exercise 3 - Create a RestAPI receiving data from devices (simulation)](exercises/2h/ex5/)
 
 
 ## How to obtain support
