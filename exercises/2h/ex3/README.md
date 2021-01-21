@@ -23,13 +23,13 @@ Creating the basic RestAPI:
 1. Create new Graph
 2. Add the RestAPI operator **OpenAPI Servlow** and the **Wiretap** operator
 3. Configure the **OpenAPI Servlow** operator
-	1.  Base Path: 'teched2020/\<di_user\>\_performance - This defines which service the Web-server calls. (Attention: No leading '/')
+	1.  Base Path: 'dat263/performance - This defines which service the Web-server calls. (Attention: No leading '/')
 	2. One-Way: True (operator is not waiting for a response but sends immediately HTTP 204 back.
 4. Add the **Write File** operator and the **To File** converter
 5. Configure the **Write File** operator for adding the data to your `performance.csv`:
 	1. Connection: DI_DATA_LAKE
 	2. Path mode: "Static (from configuration)
-	3. Path: */shared/\<di_user\>/performance.csv*
+	3. Path: */shared/dat263/workshop/\<di_user\>/performance.csv*
 	4. Mode: "Append"
 6. Add the **Workflow Terminator** to the graph. Of course if run productively there would be no "Terminator" but run perpetually.
 7. Connect all operators  
