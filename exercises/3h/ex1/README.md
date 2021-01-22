@@ -74,7 +74,10 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 - Select **Path Mode** to `Static`
 - Click on the **pencil button** to select the `DI_DATA_LAKE` connection.
 - Set **Mode** to `Append`
-- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/TAxx/performance.csv` (TAxx = your username)
+- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/<user_id>/performance.csv`
+
+    *If you are doing this tutorial as part of a workshop then your user ID will be in the format of taXX, where XX is your assigned number.*
+
 - *\[Optional\]* You can rename the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
   ![](./images/configure_writeFile.png)
 
