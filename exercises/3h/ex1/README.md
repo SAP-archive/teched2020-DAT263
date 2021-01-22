@@ -74,7 +74,7 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 - Select **Path Mode** to `Static`
 - Click on the **pencil button** to select the `DI_DATA_LAKE` connection.
 - Set **Mode** to `Append`
-- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/TAxx/performance.csv` (TAxx = your user)
+- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/TAxx/performance.csv` (TAxx = your username)
 - *\[Optional\]* You can rename the label of the `Write File` operator to `Append File`. This can be helpful for other users to understand what the pipeline is designed to do at a glance.
   ![](./images/configure_writeFile.png)
 
@@ -93,16 +93,17 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
   - Connect the `file` output node to the python operator's input node, and the
   - Right click the python3 operator and select `Open Script`. This will open a code editor as a new tab inside the Modeler.
   - Delete any pre-existing code and copy/paste below text snippet. Afterwards you may close the code editor tab.
-      ```
-    def on_input(data):
 
-    # If the attribute lastBatch is set then send an output, else do nothing
-      if data.attributes.get("message.lastBatch",False):
-        api.send("output", True)
+```
+def on_input(data):
 
-    # When an input is received, call the function on_input()
-    api.set_port_callback("input", on_input)
-      ```    
+# If the attribute lastBatch is set then send an output, else do nothing
+  if data.attributes.get("message.lastBatch",False):
+    api.send("output", True)
+
+# When an input is received, call the function on_input()
+api.set_port_callback("input", on_input)
+```    
 
 
 14. Use the search field to find the `Graph Terminator` operator. Drag and drop it into your graph. This operator will terminate the pipeline execution when receiving any input to its input node. Connect the output node your `python3` operator to the input node of the `Graph Terminator`.
