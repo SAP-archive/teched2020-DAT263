@@ -74,7 +74,7 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 - Select **Path Mode** to `Static`
 - Click on the **pencil button** to select the `DI_DATA_LAKE` connection.
 - Set **Mode** to `Append`
-- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/<user_id>/performance.csv`. This directory will be automatically created if it does not already exist.
+- Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/<user_id>/performance.csv`.
 
     *If you are doing this tutorial as part of a workshop then your user ID will be in the format of taXX, where XX is your assigned number.*
 
