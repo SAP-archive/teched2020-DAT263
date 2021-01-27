@@ -42,9 +42,9 @@ After having done all the tasks you are familiar with the general concept of **S
 ### 2h Workshop
 
 - [Getting Started](exercises/gettingstarted/)
-- [Exercise 1 - Joining and writing workflow data to SAP HANA](exercises/2h/ex2/)
-- [Exercise 2 - Running a simple data validation](exercises/2h/ex3/)
-- [Exercise 3 - Create a RestAPI receiving data from devices (simulation)](exercises/2h/ex5/)
+- [Exercise 1 - Joining and writing workflow data to SAP HANA](exercises/2h/ex1/)
+- [Exercise 2 - Running a simple data validation](exercises/2h/ex2/)
+- [Exercise 3 - Create a RestAPI receiving data from devices (simulation)](exercises/2h/ex3/)
 
 ### 3h Workshop
 
