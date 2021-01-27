@@ -49,7 +49,7 @@ After having done all the tasks you are familiar with the general concept of **S
 ### 3h Workshop
 
 - [Getting Started](exercises/gettingstarted/)
-- [Exercise 1 - Appending multiple source files to a single file](exercises/ex1/)
+- [Exercise 1 - Appending multiple source files to a single file](exercises/3h/ex1/)
 - [Exercise 2 - Joining and writing workflow data to SAP HANA](exercises/3h/ex2/)
 - [Exercise 3 - Running a simple data validation](exercises/3h/ex3/)
 - [Exercise 4 - Analyse data with Jupyter Notebook](exercises/3h/ex4/)
