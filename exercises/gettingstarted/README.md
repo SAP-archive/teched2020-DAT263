@@ -8,11 +8,11 @@ Obtain a unique user ID at the SAP Data Intelligence workshop registration page:
 * If you forget your credentials let us know
 
 
-  Tenant: `dat263`<br>
+  Tenant: `ws02`<br>
   Username: `TAxx` where xx is your assigned number<br>
   Password: `<your_assigned_password>`<br>
 
-  Logon URL: [https://vsystem.ingress.dh-6srbrjhsl.dh-canary.shoot.live.k8s-hana.ondemand.com/login/?tenant=dat263](https://vsystem.ingress.dh-6srbrjhsl.dh-canary.shoot.live.k8s-hana.ondemand.com/login/?tenant=dat263)
+  Logon URL: [https://vsystem.ingress.dh-ddcl5663x.dh-canary.shoot.live.k8s-hana.ondemand.com/login/?tenant=ws02/](https://vsystem.ingress.dh-ddcl5663x.dh-canary.shoot.live.k8s-hana.ondemand.com/login/?tenant=ws02)
 
   ![](./images/login.png)
 
