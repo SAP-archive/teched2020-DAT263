@@ -159,7 +159,7 @@ Add and connect a `Workflow Terminator` and you are done! Now you can save and r
 The second part of the exercise is to add a join with the configuration-file in order to compare the daily settings with the average of performance send during the day. The latter and more complicated part has been accomplished already. You learnt the general concept of the "Structured Data Operators" therefore the following exercise might be much easier.
 
 ### Read the configuration.csv file into the Data Transform operator
-Similar to what you already did in **Exercise 2.1** :
+Similar to what you already did in **Exercise 1.1** :
 
 * Add the `Workflow Trigger` and `Structured File Consumer` operators
 * Configure `Structured File Consumer` operator:
