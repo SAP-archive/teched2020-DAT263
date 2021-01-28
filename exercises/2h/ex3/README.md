@@ -29,7 +29,7 @@ Creating the basic RestAPI:
 5. Configure the **Write File** operator for adding the data to your `performance.csv`:
 	1. Connection: DI_DATA_LAKE
 	2. Path mode: "Static (from configuration)
-	3. Path: */shared/dat263/workshop/\<user\>/performance.csv*
+	3. Path: */shared/dat263/workshop/\<user\>_performance.csv*
 	4. Mode: "Append"
 6. Add the **Workflow Terminator** to the graph. Of course if run productively there would be no "Terminator" but run perpetually.
 7. Connect all operators  
