@@ -165,8 +165,8 @@ Similar to what you already did in **Exercise 1.1** :
 * Configure `Structured File Consumer` operator:
 	- Rename the **Label** to `Configuration`
 	- Set storage type to `sdl`
-	- Set **S3 Connection** to `DI_DATA_LAKE`
-	- Choose **S3 Source file** to be `/shared/TAxx/configuration.csv`
+	- Set **SDL Connection** to `DI_DATA_LAKE`
+	- Choose **SDL Source file** to be `/shared/DAT263/input/configuration.csv`
 * Connect the output of the `Structured File Consumer` operator to the existing `Data Tranform` operator. This will automatically create a new input port.
 
 ![](./images/configuration.png)
