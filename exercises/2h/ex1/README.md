@@ -14,7 +14,7 @@
 ## Exercise Summary
 If you have already some experience with the "Structured Data Operators" operators then you might like to try it by your own instead of going through the detailed description of the exercises. Here are the main tasks you have to do:
 
-### Exercise 2.1
+### Exercise 1.1
 1.	Create a new graph
 2.	Use the `Structured File Consumer` operator read in the file ``performance.csv`` which was generated in the previous exercise .
 3.	Add a `Data Transform` operator to your graph
@@ -30,7 +30,7 @@ If you have already some experience with the "Structured Data Operators" operato
 Save, run and check the result.
 
 
-## Exercise 2.1
+## Exercise 1.1
 
 ### Description
 
@@ -152,7 +152,7 @@ Add and connect a `Workflow Terminator` and you are done! Now you can save and r
  ![Structured Data Operators](./images/finalpipeline1.png)
 
 
-## Exercise 2.2
+## Exercise 1.2
 
 ### Description
 
