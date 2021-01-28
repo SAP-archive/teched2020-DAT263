@@ -23,7 +23,7 @@ If you have already some experience with the "Structured Data Operators" operato
 6.	Click on the "edit"-icon of the target fields "KEY1" and "KEY2" and choose as "Aggregation Type": AVG. By this you reduce the table to having only a unique record for each day and device ("CELLID"). This you can then later join with the "configuration.csv" file where you have only a daily setting.
 7.	Add a "Project" operator with additional target columns "NOM_KEY1"/float32 and "NOM_KEY2"/float32 and initialize them with "0". Add a filter for the "CELLID" and "DATE" to get finally get only one record for validation. This step is only necessary for an intermediate test.
 8.	Add an "output" operator
-9.	On the top-most pipeline level add a table producer with your target HANA table (TECHED.\<TECHED_USER>\_CELLSTATUS) and mode overwrite.
+9.	On the top-most pipeline level add a table producer with your target HANA table (\<USER>\_CELLSTATUS) and mode overwrite.
 10.	Add a "Workflow Terminator" operator
 
 
@@ -142,7 +142,7 @@ This operator is doing the core part of the whole pipeline.
 	3. **HANA Connection**:
 		- **Configuration Type** : `Configuration Manager`
 		- **Connection ID**: `HANAC_WS`
-	4. **HANA Target Table**: `TECHED.<TECHED_USER>_CELLSTATUS`. **Do not** select an existing table by clicking on the "screen"-icon but enter the name of the table literally. This creates an non-existant table using the data and data types provided by the input data.
+	4. **HANA Target Table**: `TECHED.<USER>_CELLSTATUS`. **Do not** select an existing table by clicking on the "screen"-icon but enter the name of the table literally. This creates an non-existant table using the data and data types provided by the input data.
 	4. **Mode**: `overwrite` - creates a new table or overwrites an existing table with the new table structure.
 	5. **Batch size**: `1000` (default)
 
