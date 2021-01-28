@@ -11,7 +11,6 @@ Below is a list of all the operators that you are going to need for this exercis
 |----|--------|
 |HANA Table Consumer*|Connectivity (via Flowagent)|
 |Flowagent CSV Producer|Connectivity (via Flowagent)|
-|Validation Rule|Data Quality|
 |Python3 Operator|Processing|
 |SAP HANA Client*|Connectivity|
 
@@ -20,11 +19,10 @@ Below is a list of all the operators that you are going to need for this exercis
 ## Exercise Summary
 If you like to try it first by your own then here is the short summary of the tasks needed to be done:
 
-1. Read the table `CELLSTATUS` created in [exercise 2](../ex2/README.html)
-2. Add the `Validation Rule` operator and configure such that the values of the columns `KEY1` and `KEY2` must be greater than 0. The failed records should be channeled to the `fail`-outport.
-3. Add a `Python3` operator and program it to create a new record for each failed record and send it to the outport as csv-string. The columns structure is as follows:
-		("TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID")
-4. Save the "service ticket" string to the HANA table `QMTICKET`
+1. Read the table `CELLSTATUS` created in [exercise 1](../ex1/README.html)
+2. Add a `Python3` operator and program it to create a new record for each failed record and send it to the outport as csv-string. The columns structure is as follows:
+("TIMESTAMP","STATUS","COMMENT","DATE","CELLID","NOM_KEY1","NOM_KEY2","KEY1","KEY2","ERROR_ACTION","ERROR_COLUMNS","ROW_ID")
+3. Save the "service ticket" string to the HANA table `QMTICKET`
 
 Hint: Depending on the HANA DB operator you might have the header passed as well. This you have to consider both with the "Validation"-Rule operator and with the script of the "Python3 Operator". For the latter we added a commented row that would rename the columns if the data provided with a header for complying with the following process steps.
 
@@ -55,7 +53,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 In this part we like to analyse the data with a python script.
 
 1. Add the `Python3` operator to the canvas and connect it to either to the outport of the **Wiretap** or the outport of the **Flowagent CSV Producer** (outContent)
-2. Add inport and outport to the **Python3 Operator** operator ![Ex3_2](./images/addports.png) ![inport](./images/inport.png) ![outport](./images/outport.png)
+2. Add inport and outport to the **Python3 Operator** operator ![Ex2_2](./images/addports.png) ![inport](./images/inport.png) ![outport](./images/outport.png)
 3. Open the script tab by clicking on **Script** icon of the `Python3` operator. This will open a new tab inside the Pipeline Modeler. ![scripticon](./images/scripticon.png)
 4. The operator comes with some sample code. Mark all of the text and delete it. Replace it with the following script:
 
