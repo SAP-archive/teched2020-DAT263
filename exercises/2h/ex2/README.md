@@ -101,7 +101,7 @@ You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your
 
 1. Add the `SAP HANA Client` operator to the canvas and connect the `data`-inport either to the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
 2. Configure the **SAP HANA Client**
-	1. **Connection:** `Configuration Manager/HANA_CLOUD_TECHED`
+	1. **Connection:** `Configuration Manager/HANAC_WS`
 	2. **Table name:** `"TECHED"."QMTICKET"`. Don't forget to include the double quotes!
 	3. All other parameters can be left as their default values
 3. Finally, add **Graph Terminator** operator and connect it to the `HANA client` operator
