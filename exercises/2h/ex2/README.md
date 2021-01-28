@@ -35,7 +35,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 	- `Wiretap`
 
 2. Configure the `HANA Table Consumer` operator
-	1. **HANA Connection:** `HANA_CLOUD_TECHED`
+	1. **HANA Connection:** `HANAC_WS`
 	2. **Source Table:** `TECHED"."CELLSTATUS`
 	3. **Partition Type:** `default (None)`
 	4. **Additional session parameters:** `default('')`
