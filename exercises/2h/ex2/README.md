@@ -44,7 +44,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 
 ![Ex3_1 operators](./images/ex3_1.png)
 
-3. Save the pipeline with the name `TAxx.ValidateDataQuality` where xx is your assigned user ID.
+3. Save the pipeline with the name `<User>.ValidateDataQuality` where xx is your assigned user ID.
 
 4. Before we continue with the designing the pipeline we want to verify that data is being read correctly from HANA and rewritten into a CSV format. Start the pipeline and wait for it to in status `Running`. Click on the **Open UI** icon on the `Wiretap` operator. (This icon only appears when the pipeline is running) A new browser tab is opened and if everything is configured correctly CSV data should be displayed.
 
@@ -55,7 +55,7 @@ In this part we like to analyse the data with a python script.
 1. Add the `Python3` operator to the canvas and connect it to either to the outport of the **Wiretap** or the outport of the **Flowagent CSV Producer** (outContent)
 2. Add inport and outport to the **Python3 Operator** operator ![Ex2_2](./images/addports.png) ![inport](./images/inport.png) ![outport](./images/outport.png)
 3. Open the script tab by clicking on **Script** icon of the `Python3` operator. This will open a new tab inside the Pipeline Modeler. ![scripticon](./images/scripticon.png)
-4. The operator comes with some sample code. Mark all of the text and delete it. Replace it with the following script:
+4. The operator comes with some sample code. Mark all of the text and delete it. Replace it with the script below. The basic idea of this script is to store the csv records as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, filter the records that deviates from the nominal values by specified amount and then convert it back into a csv-format and send it to the outport `output`. You could add in the row with ``df[comment] = '<User>'`` your user-name to better find your QM tickets.
 
 ```
 import pandas as pd
@@ -92,10 +92,11 @@ api.set_port_callback("input", on_input)
 
 ```
 
-The basic idea of this script is to store the csv records as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, filter the records that deviates from the nominal values by specified amount and then convert it back into a csv-format and send it to the outport `output`.
-You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your QM tickets.
+
+
 5. Add a new `Wiretap` operator to the canvas and connect it to the "Python3 Operator" outport.
-6. Save and run the pipeline and check if the output is what you expected.
+6. Save the pipeline to '\<User\>.QualityValidation'
+7. Run the pipeline and check if the output is what you expected.
 
 ## Exercise 2.4
 
@@ -106,11 +107,12 @@ You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your
 	3. All other parameters can be left as their default values
 3. Finally, add **Graph Terminator** operator and connect it to the `HANA client` operator
 4. Save and run the pipeline. It should eventually switch to status `Completed`.
-5. Inspect your table `"TECHED"."TAxx.QMTICKET"` via the Metadata Explorer to verify that the data was written as expected.
+5. Inspect the table `"TECHED"."QMTICKET"` via the Metadata Explorer to verify if your records were written as expected.
 
 
 ## Summary
 
 You have learnt an alternative way to read and write to a HANA database as with the `Structured Data` operators of the previous exercise. We used the "Validation Rule" operator to do simple data quality checks and finally how to use a python custom operator to leverage all the options provided by an advanced script.
 
+Solution Example: [Exercise 3 - Example](../ex2-example/README.md)
 Continue to [Exercise 3: Create RestAPI](../ex3/README.md)

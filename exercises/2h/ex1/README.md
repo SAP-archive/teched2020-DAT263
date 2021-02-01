@@ -69,9 +69,9 @@ Right click the `Structured File Consumer` operator and open the configuration m
 
 1. Click on Save (mid-top of pipeline canvas)
 2. In the pop-up window 'Save' enter:
-	1. Name: \<TECHUSER\>.MergeCellStatus
+	1. Name: \<USER\>.MergeCellStatus
 	2. Description: Merge to CellStatus
-	3. Category: <TECHUSER>
+	3. Category:  \<USER\>
 3. Click "OK"
 
 
@@ -215,5 +215,7 @@ Again you should see only one record if you chose to apply the the filter but th
 ## Summary
 
 You've now actually created a rather complex data transformation from two different data sources, with joins, aggregation and filtering and storing it to a different type of storage.
+
+Solution Example: [Exercise 1 - Example](../ex1-example/README.md)
 
 Continue to [Exercise 2: Validating Data Quality](../ex2/README.md)

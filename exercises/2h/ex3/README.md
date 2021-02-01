@@ -33,7 +33,7 @@ Creating the basic RestAPI:
 	4. Mode: "Append"
 6. Add the **Workflow Terminator** to the graph. Of course if run productively there would be no "Terminator" but run perpetually.
 7. Connect all operators  
-8. Save the pipeline as `taxx.DeviceRestAPI`
+8. Save the pipeline as `<User>.DeviceRestAPI`
 
 ![restapi](./images/restapi1.png)
 
@@ -59,7 +59,7 @@ Be sure to use your `TAxx` credentials.
 #### Request URL
 
 
-Substitute the URL and the user ID and send a POST request to: `https://<url pipeline modeler>/openapi/service/ta<xx>_performance/test`
+Substitute the URL and the user ID and send a POST request to: `https://<url pipeline modeler>/openapi/service/<User>_performance/test`
 
 It is important to add a process-tag at the end, otherwise the request gets an error although the process tag is not used.
 
@@ -70,7 +70,7 @@ In the "Headers"-tab add the parameter: X-Requested-With - XMLHttpRequest. Witho
 
 #### Authorization
 1. Change the authorization TYPE: Basic Auth
-2. The username must be prefixed with the tenant ID followed by a backslash e.g. `dat263\taXX`
+2. The username must be prefixed with the tenant ID followed by a backslash e.g. `ws02\<User>`
 
 ![postman3](./images/postman3.png)
 
@@ -99,3 +99,5 @@ python3 ./celldata.py --cellid 1234512 --user <di_user> --pwd <password>
 ## Summary
 
 In this final exercise you have learnt how to setup and send data -- using various HTTP clients -- to a Rest API web service hosted inside SAP Data Intelligence.
+
+[Solution Example](../ex3-example/README.md)
