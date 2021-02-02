@@ -1,6 +1,6 @@
 # Exercise 1: Appending multiple source files to a single file
 
-In this exercise, you will use the Metadata Explorer to explore and view a batch of files stored in an Amazon S3 bucket. Then, using the Pipeline Modeler you will read this entire of batch of files and consolidate them into a single csv file that will be used in a later exercise.
+In this exercise, you will use the Metadata Explorer to explore and view a batch of files stored in an Amazon S3 bucket. Then, using the Pipeline Modeler you will read this entire batch of files and consolidate them into a single csv file that will be used in a later exercise.
 
   ![](./images/completedModel.png)
 
@@ -20,7 +20,7 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 
   ![](./images/directory_device_performance.png)
 
-4. Click on the **View Factsheet** button
+4. Click on the **View Factsheet** button on any cellpm file
 
   ![](./images/button_viewFactsheet.png)
 
@@ -53,10 +53,10 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 
   ![](./images/configure_listFiles.png)
 
-6. Set the **Configuration Type** to `Connection Management`  and **Connection ID** to `TechEd2020_S3` and select **Save**
+6. Set the **Configuration Type** to `Connection Management`  and set **Connection ID** to your cloud storage (e.g `TechEd2020_S3`) then select **Save**
  ![](./images/s3_Connection.png)
 
-7. Browse the connection by clicking on the **monitor icon** and select the path directory `/device_performance` and click **Save**
+7. Browse the connection by clicking on the **monitor icon** and select the path directory `/device_performance` and click **OK**
 
 8. Now would be a great time to save your progress. Click on the **floppy disk** icon located in the toolbar at the top of the screen. Enter the name `FileCollectionPerformance_TAxx` where xx is the ID assigned to you at the beginning of the workshop.
 
@@ -71,7 +71,7 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 11. Use the search field to find the `Write File` operator.  Drag and drop it into your graph. The `Write File` operator writes any content that is provided to its input node as a file to various object store services. Connect the output node `file` to the input node of the `Write File` operator.
 
 12. Like the `Read File` operator the `Write File` operator can be configured at runtime or design time. In this exercise we will provide the target directory at design time.
-- Select **Path Mode** to `Static`
+- Select **Path Mode** to `Static (from configuration)`
 - Click on the **pencil button** to select the `DI_DATA_LAKE` connection.
 - Set **Mode** to `Append`
 - Since the file we want to write does not yet exist we cannot browse for the path. Instead manually enter the following path: `/shared/<user_id>/performance.csv`. This directory will be automatically created if it does not already exist.
@@ -93,7 +93,7 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
 
 ![](./images/configure_python3.png)
 
-  - Connect the `file` output node to the python operator's input node, and the
+  - Connect the `file` output node of the `Write File` operator to the `python3` operator's input node
   - Right click the python3 operator and select `Open Script`. This will open a code editor as a new tab inside the Modeler.
   - Delete any pre-existing code and copy/paste below text snippet. Afterwards you may close the code editor tab.
 
@@ -136,7 +136,7 @@ Now that you've completed designing your graph it is time to execute it and insp
 
   ![](./images/goTometadataExplorer.png)
 
-4. Click on **Browse Connections** and navigate to the `/input/TAxx` directory in the `TechEd2020_S3` connection.
+4. Click on **Browse Connections** and navigate to the `/input/TAxx` directory in the cloud storage connection (e.g `TechEd2020_S3`).
 
 5. Click on on the **View Factsheet** button on the `performance.csv` file
 
@@ -158,6 +158,6 @@ We need the same data pipeline for consolidating the configuration files into on
 
 ## Summary  
 
-In this exercise you have consolidated a batch of csv files into a single csv file using the List, Read, and Write file operators. By using the Message Filter operator you were also able to gracefully terminate the pipeline when all files have been processed and written to S3. Finally, you were able to verify the correctness of your output using the Metadata Explorer.
+In this exercise you have consolidated a batch of csv files into a single csv file using the List, Read, and Write file operators. By using the Message Filter operator you were also able to gracefully terminate the pipeline when all files have been processed and written to cloud storage. Finally, you were able to verify the correctness of your output using the Metadata Explorer.
 
 [**Click here to move to the next exercise**](/exercises/ex2/README.md)  where you will learn to use the workflow operators to join and aggregate two csv files and store the result in a HANA database.
