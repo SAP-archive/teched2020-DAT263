@@ -5,7 +5,7 @@ import random
 from datetime import datetime
 
 # DI pipeline path: DI-URL/<path>/<operation>
-url = 'https://vsystem.ingress.dh-6srbrjhsl.dh-canary.shoot.live.k8s-hana.ondemand.com/app/pipeline-modeler/openapi/service/teched2020/teadm_performance/data'
+url = 'https://<your_DI_instance>/app/pipeline-modeler/openapi/service/teched2020/teadm_performance/data'
 
 # commandline parser
 parser = argparse.ArgumentParser(description='Sending device data to SAP Data Intelligence.')
