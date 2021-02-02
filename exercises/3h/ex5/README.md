@@ -83,19 +83,6 @@ In the body you can add the actual data that should be posted. Here we can add a
 ![postman2](./images/postman2.png)
 
 
-
-### Python client
-
-If you have a python-engine installed on your local system then you could also use the script that you have downloaded from this GitHub repository together with the Jupyter Notebook: [scripts.zip](../../scripts.zip).
-
-First you have to ensure that the url in the script is the right one. Open the script with a text editor and verify and adjust the url described in the section Postman/Request URL.
-
-Start the RestAPI pipeline and when running then start the script in a terminal with:
-
-```
-python3 ./celldata.py --cellid 1234512 --user <di_user> --pwd <password>
-```
-
 ## Summary
 
 In this final exercise you have learnt how to setup and send data -- using various HTTP clients -- to a Rest API web service hosted inside SAP Data Intelligence.
