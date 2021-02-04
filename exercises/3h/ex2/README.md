@@ -32,7 +32,7 @@ Save, run and check the result.
 
 ## Exercise 2.1
 
-### Description
+[Video walkthrough: Writing to HANA](https://www.youtube.com/watch?v=dB3tBW83EAw&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=12)
 
 After completing these steps you will have created a first projection, aggregation and saving data transformation.
 
@@ -154,7 +154,7 @@ Add and connect a `Workflow Terminator` and you are done! Now you can save and r
 
 ## Exercise 2.2
 
-### Description
+[Video walkthrough: Joining data](https://www.youtube.com/watch?v=Fo0eu5C35LY&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=13)
 
 The second part of the exercise is to add a join with the configuration-file in order to compare the daily settings with the average of performance send during the day. The latter and more complicated part has been accomplished already. You learnt the general concept of the "Structured Data Operators" therefore the following exercise might be much easier.
 

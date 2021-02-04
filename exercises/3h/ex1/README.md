@@ -1,6 +1,6 @@
 # Exercise 1: Appending multiple source files to a single file
 
-In this exercise, you will use the Metadata Explorer to explore and view a batch of files stored in an Amazon S3 bucket. Then, using the Pipeline Modeler you will read this entire batch of files and consolidate them into a single csv file that will be used in a later exercise.
+In this exercise, you will use the Metadata Explorer to explore and view a batch of files stored in a cloud storage account such as an Amazon S3 bucket. Then, using the Pipeline Modeler you will read this entire batch of files and consolidate them into a single csv file that will be used in a later exercise.
 
   ![](./images/completedModel.png)
 
@@ -29,6 +29,10 @@ In this exercise, you will use the Metadata Explorer to explore and view a batch
   ![](./images/button_dataPreview.png)
 
 ## Part 2: Building the pipeline
+
+
+[Video walkthrough: Write files and Message Filters](https://www.youtube.com/watch?v=9QXJSprezzY&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=10)
+
 
 **Objective**: In the previous section you observed that the ```device_performance``` directory contains multiple small source csv files that contain four columns. In this section we will read the contents of these sources file and re-write them into a single output csv file.
 
@@ -119,6 +123,7 @@ api.set_port_callback("input", on_input)
 
 
 ## Part 3: Executing the pipeline
+[Video walkthrough: Running and copying graphs](https://www.youtube.com/watch?v=zGKLkKI9wxw&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=11)
 
 Now that you've completed designing your graph it is time to execute it and inspect the output data.
 

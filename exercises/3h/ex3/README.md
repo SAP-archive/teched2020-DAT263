@@ -30,6 +30,8 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 
 ## Exercise 3.1
 
+[Video walkthrough: Wiretaps](https://www.youtube.com/watch?v=w0_0mIi7ohM&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=14)
+
 1. Add the following operators to the pipeline canvas and connect them in this order:
 	- `Workflow Trigger`
 	- `HANA Table Consumer` (Use outport `outConfig`)
@@ -37,23 +39,26 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 	- `Wiretap`
 
 2. Configure the `HANA Table Consumer` operator
-	1. **HANA Connection:** `HANA_CLOUD_TECHED`
-	2. **Source Table:** `TECHED"."CELLSTATUS`
+	1. **HANA Connection:** `HANA_CLOUD_TECHED` or `HANA_LOCALHOST`
+	2. **Source Table:** `"TECHED"."CELLSTATUS"`
 	3. **Partition Type:** `default (None)`
 	4. **Additional session parameters:** `default('')`
 	5. **Fetch size:** `default (1000)`
 
+3. Save the pipeline with the name `TAxx.ValidateDataQuality` where xx is your assigned workshop user ID.
+
+4. Before we continue with the designing the pipeline we want to verify that data is being read correctly from HANA and rewritten into a CSV format. Start the pipeline and wait until it is in status `Running`. Click on the **Open UI** icon on the `Wiretap` operator. *(This icon only appears when the pipeline is running)* A new browser tab is opened and if everything is configured correctly CSV data should be displayed.
+
+5. Stop the graph
 
 ![Ex3_1 operators](./images/ex3_1.png)
 
-3. Save the pipeline with the name `TAxx.ValidateDataQuality` where xx is your assigned user ID.
-
-4. Before we continue with the designing the pipeline we want to verify that data is being read correctly from HANA and rewritten into a CSV format. Start the pipeline and wait for it to in status `Running`. Click on the **Open UI** icon on the `Wiretap` operator. (This icon only appears when the pipeline is running) A new browser tab is opened and if everything is configured correctly CSV data should be displayed.
-
 ## Exercise 3.2
 
-1. Add the `Validation Rule` operator and connect it to the outport of the `Wiretap` operator
-2. Configure the **Input Schema**: Click on *Edit*
+[Video walkthrough: Validation rule](https://www.youtube.com/watch?v=8mMpScrA1ZU&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=15)
+
+1. Add the `Validation Rule` operator and connect the preceding `Wiretap` operator or directly to the `Flowagent CSV Producer`
+2. Configure the **Input Schema** of the `Validation Rule` operator: Click on *Edit*
 	- In the new configuration window "Edit property 'Input Schema'
 	- Add for each table column an item:
 
@@ -67,28 +72,37 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 	|KEY2    |Number            |
 
 	![configvrschema](./images/Configvrschema.png)
+
 3. Return to the operator's configuration menu and edit **Rules**:
-	- Add the following rule :
-	
+	- Add the following rule:
+
 	|Column|Condition|Value  |Fail Action|
 	|------|---------|-------|-----------|
 	|KEY1  |<        |130    |FAIL       |
 	|KEY1  |>        |70     |FAIL       |
 
 
-	This might look a bit counter-intuitive but it actually means all values > 130 and < 70 fail.
+*This might look a bit counter-intuitive but it actually means all values > 130 and < 70 fail.*
 
-	![configvrrules](./images/Configvrrules.png)
+![configvrrules](./images/Configvrrules.png)
+
 3. All other configuration parameter leave as default.
 4. Add two **Wiretab** operators and connect them to the outports **Validation Rule** named `pass` and `fail`.
-5. Run the pipeline and check the output on both wiretaps. If your HANA table only one filtered record from Excercise 2 then you should see one failed record in the wiretap operator.
+5. Save and then Run the pipeline and check the output on both wiretaps. If your HANA table contains only one filtered record from Exercise 2 then you should see only a single failed record in the wiretap operator.
 ![Ex3_2](./images/ex3_2.png)
 
-## Excercise 3.3
+6. Stop the graph
+
+## Exercise 3.3
+
+[Video walkthrough: Python operators](https://www.youtube.com/watch?v=GYtyMPVPk3Y&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=16)
+
 In this last section we will use Python to correct the failed records.
 
-1. Add the `Python3` operator to the canvas and connect it to either to the outport of the **Wiretap** or the outport of the **Validation Rule** (fail)
-2. Add inport and outport to the **Python3 Operator** operator ![Ex3_2](./images/addports.png) ![inport](./images/inport.png) ![outport](./images/outport.png)
+1. Add the `Python3` operator to the canvas and add in port and out port to the **Python3 Operator** operator ![Ex3_2](./images/addports.png) ![inport](./images/inport.png) ![outport](./images/outport.png)
+
+2. Connect its in port to either to the outport of the **Wiretap** or the outport of the **Validation Rule** (fail)
+
 3. Open the script tab by clicking on **Script** icon of the `Python3` operator. This will open a new tab inside the Pipeline Modeler. ![scripticon](./images/scripticon.png)
 4. The operator comes with some sample code. Mark all of the text and delete it. Replace it with the following script:
 
@@ -115,26 +129,28 @@ def on_input(data):
 
     api.send("ticket", api.Message(attributes={'data':'FAILED'},body=df.to_csv(index = False,date_format="%Y-%m-%d %H:%M:%S",header=False)))
 
-
+# When data is received in the "failed" input port, call the on_input(data) function
 api.set_port_callback("failed", on_input)
 
 ```
 
 The basic idea of this script is to store the csv records ,which are coming from the `fail` outport of the `Validation Rule` operator, as an pandas DataFrame. Then we add some additional columns and values to this DataFrame, convert it back into a csv-format and send it to the outport `ticket`.
-You could add in the ``df[comment] = 'TAxx'`` your user-name to better find your QM tickets.
+You could add in the ``df[comment] = 'TAxx'`` your workshop user-name to better find your QM tickets.
+
 5. Add a new `Wiretap` operator to the canvas and connect it to the "Python3 Operator" outport.
 6. Save and run the pipeline and check if the output is what you expected.
 
 ## Exercise 3.4
+[Video walkthrough](https://www.youtube.com/watch?v=Gyv--hpav_w&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=17)
 
-1. Add the `SAP HANA Client` operator to the canvas and connect it either to the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
+1. Add the `SAP HANA Client` operator to the canvas and connect its sql port  to either the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
 2. Configure the **SAP HANA Client**
-	1. **Connection:** `Configuration Manager/HANA_CLOUD_TECHED`
+	1. **Connection:** `Configuration Manager` -> `HANA_CLOUD_TECHED` or `HANA_LOCALHOST`
 	2. **Table name:** `"TECHED"."QMTICKET"`. Don't forget to include the double quotes!
-	3. All other parameters can be left as their default values
+	3. All other parameters can be left at their default values
 3. Finally, add **Graph Terminator** operator and connect it to the `HANA client` operator
 4. Save and run the pipeline. It should eventually switch to status `Completed`.
-5. Inspect your table `"TECHED"."TAxx.QMTICKET"` via the Metadata Explorer to verify that the data was written as expected.
+5. Inspect your table `"TECHED"."QMTICKET"` via the Metadata Explorer to verify that the data was written as expected.
 
 
 ## Summary
