@@ -15,25 +15,26 @@ Creating a Pipeline with a web-service that can be called externally and hand ov
 
 In order to test the Rest API service a client application is provided which can generate and send example data to web service. You may alternatively use the Postman application or the terminal command `curl`.
 
+
 ## Exercise 5.1
-Each running pipeline consumes a node in the cluster. Due to the limited size of our workshop-cluster we ask you kindly to ensure that the web-service pipeline is only running as short as possible. For testing purpose we write the web-service response to a file and then terminate the graph.
+Each running pipeline consumes a node in the cluster. If you are using a shared clusters with many users it is highly encouraged to ensure that the web-service pipeline is only running as short as possible. For that reason we will design the pipeline to terminate as as soon as it has received a new record and appended it to a file.
 
 Creating the basic RestAPI:
 
 1. Create new Graph
 2. Add the RestAPI operator **OpenAPI Servlow** and the **Wiretap** operator
 3. Configure the **OpenAPI Servlow** operator
-	1.  Base Path: 'teched2020/\<di_user\>\_performance - This defines which service the Web-server calls. (Attention: No leading '/')
-	2. One-Way: True (operator is not waiting for a response but sends immediately HTTP 204 back.
-4. Add the **Write File** operator and the **To File** converter
+	1.  **Base Path**: `teched2020/<your_username>_performance` - This defines the path on which the web server can be accessed
+	2. **One-Way**: `True` (Operator will not return a response to the client and instead sends immediately HTTP 204 back)
+4. Add the **To File** converter and the **Write File** operator, then connect them
 5. Configure the **Write File** operator for adding the data to your `performance.csv`:
-	1. Connection: DI_DATA_LAKE
-	2. Path mode: "Static (from configuration)
-	3. Path: */shared/\<di_user\>/performance.csv*
-	4. Mode: "Append"
-6. Add the **Workflow Terminator** to the graph. Of course if run productively there would be no "Terminator" but run perpetually.
+	1. **Connection**: `DI_DATA_LAKE`
+	2. **Path mode**: Static (from configuration)
+	3. **Path**: `/shared/<your_username>/performance.csv`
+	4. **Mode**: Append
+6. Add the **Workflow Terminator** to the graph. Of course if this was pipeline running productively we would not use a terminator and the graph would run perpetually
 7. Connect all operators  
-8. Save the pipeline as `taxx.DeviceRestAPI`
+8. Save the pipeline as `<your_username>.DeviceRestAPI`
 
 ![restapi](./images/restapi1.png)
 
@@ -47,30 +48,33 @@ Creating the basic RestAPI:
 
 ### HTML Test Page
 
-The easiest way to test the Rest API is using the small web application we have developed for this workshop [https://sendcelldata.cfapps.eu10.hana.ondemand.com](https://sendcelldata.cfapps.eu10.hana.ondemand.com).
+The easiest way to test the Rest API is using the small web application we have developed for this particular tutorial [https://sendcelldata.cfapps.eu10.hana.ondemand.com](https://sendcelldata.cfapps.eu10.hana.ondemand.com).
 
-Be sure to use your `TAxx` credentials.
+Be sure to use the tenant name as a prefix and your username e.g. `TAxx` or `system` as credentials e.g. `default\system`
+
+Note, that the URL must end with a forward slash ( / ) otherwise you will get the error **`RestAPI not running!`**
 
 ![Test Page](./images/TestRestAPI.png)
 
-![Response Page](./images/ResponseTestRestAPI.png)
 
-### (Optional) Using Postman to test REST API
+### (Optional/Alternative) Using Postman to test REST API
 #### Request URL
 
 
-Substitute the URL and the user ID and send a POST request to: `https://<url pipeline modeler>/openapi/service/ta<xx>_performance/test`
+Substitute the URL and the user ID and send a POST request to: `https://<url pipeline modeler>/openapi/service/teched2020/<your_username>_performance/`
 
 It is important to add a process-tag at the end, otherwise the request gets an error although the process tag is not used.
 
 #### Request Header
-In the "Headers"-tab add the parameter: X-Requested-With - XMLHttpRequest. Without this parameter you get the error: "Forbidden cross-site request"
+In the "Headers"-tab add the following header: `X-Requested-With` :  `XMLHttpRequest`.
+
+Without this parameter you get the error: `Forbidden cross-site request`
 
 ![postman1](./images/postman1.png)
 
 #### Authorization
 1. Change the authorization TYPE: Basic Auth
-2. The username must be prefixed with the tenant ID followed by a backslash e.g. `dat263\taXX`
+2. The username must be prefixed with the tenant ID followed by a backslash and then the username e.g. `default\taXX`
 
 ![postman3](./images/postman3.png)
 
