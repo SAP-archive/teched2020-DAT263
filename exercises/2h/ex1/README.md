@@ -1,7 +1,7 @@
 # Exercise 1 (2h-W): Joining and writing workflow data to SAP HANA
 ## Description
 
-**Objective:** In this exercise, we will merge two files and store the result in a HANA Database. To do this we will introduce you to the **Structured Data operators** as well as the **Data Workflow operators**.   To reduce complexity this exercise has split the task into to parts:
+**Objective:** In this exercise, we will merge two files and store the result in a HANA Database. To do this we will introduce you to the **Structured Data operators** as well as the **Data Workflow operators**.   To reduce complexity this exercise has split the task into two parts:
 
 1. Read the ``performance.csv`` from an object store and after a projection and aggregation of the data we store the it to a HANA table.
 

@@ -44,7 +44,7 @@ Hint: Depending on the HANA DB operator you might have the header passed as well
 
 ![Ex3_1 operators](./images/ex3_1.png)
 
-3. Save the pipeline with the name `<User>.ValidateDataQuality` where xx is your assigned user ID.
+3. Save the pipeline with the name `<taxx>.ValidateDataQuality` where xx is your assigned user ID.
 
 4. Before we continue with the designing the pipeline we want to verify that data is being read correctly from HANA and rewritten into a CSV format. Start the pipeline and wait for it to in status `Running`. Click on the **Open UI** icon on the `Wiretap` operator. (This icon only appears when the pipeline is running) A new browser tab is opened and if everything is configured correctly CSV data should be displayed.
 
@@ -75,10 +75,10 @@ def on_input(data):
     df["ROW_ID"] = df.index
     df["ERROR_COLUMNS"] = ''
     df["ERROR_ACTION"] = 'D'
-    
+
     max_diff_key1 = 30
     max_diff_key2 = 60
-    
+
     df = df.loc[(df['KEY1'] < df['NOM_KEY1'] - max_diff_key1) | (df['KEY1'] > df['NOM_KEY1'] + max_diff_key1) | \
                    (df['KEY2'] < df['NOM_KEY2'] - max_diff_key2) | (df['KEY2'] > df['NOM_KEY2'] + max_diff_key2)]
 
