@@ -165,4 +165,4 @@ We need the same data pipeline for consolidating the configuration files into on
 
 In this exercise you have consolidated a batch of csv files into a single csv file using the List, Read, and Write file operators. By using the Message Filter operator you were also able to gracefully terminate the pipeline when all files have been processed and written to cloud storage. Finally, you were able to verify the correctness of your output using the Metadata Explorer.
 
-[**Click here to move to the next exercise**](/exercises/ex2/README.md)  where you will learn to use the workflow operators to join and aggregate two csv files and store the result in a HANA database.
+[**Click here to move to the next exercise**](exercises/3h/ex2)  where you will learn to use the workflow operators to join and aggregate two csv files and store the result in a HANA database.
