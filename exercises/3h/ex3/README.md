@@ -143,7 +143,7 @@ You could add in the ``df[comment] = 'TAxx'`` your workshop user-name to better 
 ## Exercise 3.4
 [Video walkthrough](https://www.youtube.com/watch?v=Gyv--hpav_w&list=PLkzo92owKnVyY89xEshp_cSQ0QF8EE927&index=17)
 
-1. Add the `SAP HANA Client` operator to the canvas and connect its sql port  to either the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
+1. Add the `SAP HANA Client` operator to the canvas and connect its data port to either the outport of the **Wiretap** or directly to outport of the `Python3 Operator` operator
 2. Configure the **SAP HANA Client**
 	1. **Connection:** `Configuration Manager` -> `HANA_CLOUD_TECHED` or `HANA_LOCALHOST`
 	2. **Table name:** `"TECHED"."QMTICKET"`. Don't forget to include the double quotes!
