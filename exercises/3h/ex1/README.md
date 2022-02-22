@@ -141,7 +141,7 @@ Now that you've completed designing your graph it is time to execute it and insp
 
   ![](./images/goTometadataExplorer.png)
 
-4. Click on **Browse Connections** and navigate to the `/shared/TAxx/` (Your folderdername can be different) directory in the cloud storage connection (e.g `DI_DATA_LAKE`).
+4. Click on **Browse Connections** and navigate to the `/shared/TAxx/` directory(Your folder/directory can be different) in the cloud storage connection (e.g `DI_DATA_LAKE`).
 
 5. Click on on the **View Factsheet** button on the `performance.csv` file
 
