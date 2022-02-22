@@ -12,9 +12,11 @@ In order to understand better the data you receive from the devices and develop 
 3. You will be taken to the **Scenario Details** page. Scroll down to the *Notebooks* section and create a new notebook ![Create Scenario](./images/createjn.png).
 
 4. Download the [scripts.zip](https://github.com/SAP-samples/teched2020-DAT263/blob/main/scripts.zip) file. There is a Jupyter Notebook that you can upload: `qm_analysis_cellstatus.ipynb` ![upload](./images/uploadjn.png)
-5. Before you run the Jupyter notebook you have to change the connection to direct to your table. Go to the cell where the connection is defined and change the table-name to `<TECHED_USER>_CELLSTATUS`. ![connect_change](./images/connect_change.png)
-5. Now you can run the whole Jupyter notebook cell by cell by clicking on the run-button on the icon-bar. ![run_cell](./images/run_cells_jnb.png)
-6. At the end of this Jupyter notebook you find blank cells where you can either do your own analysis or use our proposed code snippets. You can copy and paste these code snippets to the corresponding cells.
+5. Before you run the Jupyter notebook you have to change the connection to direct to your table. Go to the cell where the connection is defined and change the table-name to `<TECHED_USER>_CELLSTATUS`. (Your connectionID might be different like `HANA_LOCALHOST`)
+
+![connect_change](./images/connect_change.png)
+7. Now you can run the whole Jupyter notebook cell by cell by clicking on the run-button on the icon-bar. ![run_cell](./images/run_cells_jnb.png)
+8. At the end of this Jupyter notebook you find blank cells where you can either do your own analysis or use our proposed code snippets. You can copy and paste these code snippets to the corresponding cells.
 
 
 #### KEY1 for all Cells
