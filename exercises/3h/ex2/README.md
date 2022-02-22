@@ -125,7 +125,7 @@ This operator is doing the core part of the whole pipeline.
 	- Switch to the **Filter** tab
 	- Add a condition, similar to that of  SQL WHERE condition:
 
-			"CELLID" = 1234512 AND "DATE" = '2020-11-01'
+			"CELLID" = 7148927 AND "DATE" = '2020-10-01'
 	 ![Structured Data Operators](./images/datafilter.png)
 12. Return to the `Data Transform` modeling perspective and right-click on the outport of the last `Projection` operator and select `Create Data target`.
  ![Structured Data Operators](./images/createdatatarget.png).
