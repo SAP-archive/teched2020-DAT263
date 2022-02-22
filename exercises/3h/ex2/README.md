@@ -141,7 +141,7 @@ This operator is doing the core part of the whole pipeline.
 	2. **Database type**: `HANA`
 	3. **HANA Connection**:
 		- **Configuration Type** : `Configuration Manager`
-		- **Connection ID**: `HANA_CLOUD_TECHED`
+		- **Connection ID**: `HANA_CLOUD_TECHED` or `HANA_LOCALHOST`
 	4. **HANA Target Table**: `TECHED.<TECHED_USER>_CELLSTATUS`. **Do not** select an existing table by clicking on the "screen"-icon but enter the name of the table literally. This creates an non-existant table using the data and data types provided by the input data.
 	4. **Mode**: `overwrite` - creates a new table or overwrites an existing table with the new table structure.
 	5. **Batch size**: `1000` (default)
@@ -161,7 +161,7 @@ The second part of the exercise is to add a join with the configuration-file in 
 ### Read the configuration.csv file into the Data Transform operator
 Similar to what you already did in **Exercise 2.1** :
 
-* Add the `Workflow Trigger` and `Structured File Consumer` operators
+* Add the `Workflow Trigger` and `Structured File Consumer` operators and connect them
 * Configure `Structured File Consumer` operator:
 	- Rename the **Label** to `Configuration`
 	- Set storage type to `sdl`
