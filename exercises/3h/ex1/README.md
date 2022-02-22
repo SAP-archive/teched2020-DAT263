@@ -141,11 +141,11 @@ Now that you've completed designing your graph it is time to execute it and insp
 
   ![](./images/goTometadataExplorer.png)
 
-4. Click on **Browse Connections** and navigate to the `/input/TAxx` directory in the cloud storage connection (e.g `TechEd2020_S3`).
+4. Click on **Browse Connections** and navigate to the `/shared/userdefined/` directory in the cloud storage connection (e.g `DI_DATA_LAKE`).
 
 5. Click on on the **View Factsheet** button on the `performance.csv` file
 
-  ![](./images/performance_viewFactsheet.png)
+  ![](./images/performance_viewFactsheet_updated.png)
 
 
 6. Click on the **Data Preview** button. Observe that all of the individual files from the source directory have been appended into a single consolidated csv file (The file size should be approx 83kb)
