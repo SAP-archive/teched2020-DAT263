@@ -126,7 +126,7 @@ This operator is doing the core part of the whole pipeline.
 	- Add a condition, similar to that of  SQL WHERE condition:
 
 			"CELLID" = 7148927 AND "DATE" = '2020-10-01'
-	 ![Structured Data Operators](./images/datafilter.png)
+	 ![Structured Data Operators](./images/datafilter_updated.png)
 12. Return to the `Data Transform` modeling perspective and right-click on the outport of the last `Projection` operator and select `Create Data target`.
  ![Structured Data Operators](./images/createdatatarget.png).
 12. By clicking on the **auto-layout** you can rearrange your pipeline
